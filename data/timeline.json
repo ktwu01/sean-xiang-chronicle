@@ -17,7 +17,9 @@
       "sourceIds": [
         "dossier",
         "timeline-v2"
-      ]
+      ],
+      "id": "age-16-ustc",
+      "chapterId": "early-acceleration"
     },
     {
       "start_date": {
@@ -30,7 +32,9 @@
       "sourceIds": [
         "dossier",
         "timeline-v2"
-      ]
+      ],
+      "id": "early-technical-formation",
+      "chapterId": "early-acceleration"
     },
     {
       "start_date": {
@@ -43,7 +47,9 @@
       "sourceIds": [
         "launch-academy",
         "dossier"
-      ]
+      ],
+      "id": "cuhk-phd",
+      "chapterId": "research-formation"
     },
     {
       "start_date": {
@@ -56,7 +62,9 @@
       "sourceIds": [
         "launch-academy",
         "dossier"
-      ]
+      ],
+      "id": "beckman-uc-irvine",
+      "chapterId": "california-transition"
     },
     {
       "start_date": {
@@ -69,7 +77,9 @@
       "sourceIds": [
         "dossier",
         "timeline-v2"
-      ]
+      ],
+      "id": "bloombase-founded",
+      "chapterId": "founding-bloombase"
     },
     {
       "start_date": {
@@ -83,7 +93,9 @@
       },
       "sourceIds": [
         "vmware-2014"
-      ]
+      ],
+      "id": "vmware-technology-alliance",
+      "chapterId": "enterprise-validation"
     },
     {
       "start_date": {
@@ -97,7 +109,9 @@
       },
       "sourceIds": [
         "hitachi-2014"
-      ]
+      ],
+      "id": "hitachi-alliance",
+      "chapterId": "enterprise-validation"
     },
     {
       "start_date": {
@@ -111,7 +125,9 @@
       },
       "sourceIds": [
         "hp-2015"
-      ]
+      ],
+      "id": "hp-eskm-interoperability",
+      "chapterId": "enterprise-validation"
     },
     {
       "start_date": {
@@ -125,7 +141,9 @@
       },
       "sourceIds": [
         "thales-2015"
-      ]
+      ],
+      "id": "thales-asap-alliance",
+      "chapterId": "enterprise-validation"
     },
     {
       "start_date": {
@@ -139,7 +157,9 @@
       },
       "sourceIds": [
         "hpe-2015"
-      ]
+      ],
+      "id": "hpe-helion-arcsight",
+      "chapterId": "enterprise-validation"
     },
     {
       "start_date": {
@@ -153,7 +173,9 @@
       },
       "sourceIds": [
         "ibm-2017"
-      ]
+      ],
+      "id": "ibm-validation",
+      "chapterId": "enterprise-validation"
     },
     {
       "start_date": {
@@ -167,7 +189,9 @@
       },
       "sourceIds": [
         "vmware-aws-2018"
-      ]
+      ],
+      "id": "vmware-cloud-on-aws",
+      "chapterId": "enterprise-validation"
     },
     {
       "start_date": {
@@ -181,7 +205,9 @@
       },
       "sourceIds": [
         "launch-academy"
-      ]
+      ],
+      "id": "canada-expansion-story",
+      "chapterId": "geographic-expansion"
     },
     {
       "start_date": {
@@ -195,7 +221,9 @@
       },
       "sourceIds": [
         "azure-2019"
-      ]
+      ],
+      "id": "azure-marketplace",
+      "chapterId": "enterprise-validation"
     },
     {
       "start_date": {
@@ -209,7 +237,9 @@
       },
       "sourceIds": [
         "ncipher-2019"
-      ]
+      ],
+      "id": "ncipher-collaboration",
+      "chapterId": "enterprise-validation"
     },
     {
       "start_date": {
@@ -223,7 +253,9 @@
       },
       "sourceIds": [
         "futurex-2020"
-      ]
+      ],
+      "id": "futurex-collaboration",
+      "chapterId": "enterprise-validation"
     },
     {
       "start_date": {
@@ -235,7 +267,9 @@
       },
       "sourceIds": [
         "nvidia-2023"
-      ]
+      ],
+      "id": "nvidia-dpu-gpu-era",
+      "chapterId": "ai-era"
     },
     {
       "start_date": {
@@ -247,7 +281,9 @@
       },
       "sourceIds": [
         "dossier"
-      ]
+      ],
+      "id": "conference-ecosystem-visibility",
+      "chapterId": "ai-era"
     },
     {
       "start_date": {
@@ -261,7 +297,9 @@
       },
       "sourceIds": [
         "utimaco-2025"
-      ]
+      ],
+      "id": "utimaco-alliance",
+      "chapterId": "ai-era"
     }
   ]
 }

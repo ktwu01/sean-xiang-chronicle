@@ -269,6 +269,85 @@
     .source-pill {
       text-decoration: none; padding: 8px 10px; border-radius: 999px; background: rgba(180,138,90,.12); border: 1px solid rgba(180,138,90,.18); color: #694f2f; font-size: 12px;
     }
+    .archive-cluster {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(25,50,79,.06), rgba(25,50,79,.035));
+      border: 1px solid rgba(25,50,79,.08);
+    }
+    .archive-cluster-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .archive-cluster-title {
+      display: grid;
+      gap: 6px;
+    }
+    .archive-cluster-title strong {
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+    }
+    .archive-cluster-title span {
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 54ch;
+      font-size: 14px;
+    }
+    .archive-cluster-jump {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(25,50,79,.08);
+      border-radius: 999px;
+      background: rgba(255,255,255,.7);
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 10px 12px;
+      cursor: pointer;
+    }
+    .archive-cluster-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .archive-cluster-link {
+      min-width: min(100%, 220px);
+      flex: 1 1 210px;
+      text-align: left;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(25,50,79,.08);
+      background: rgba(255,255,255,.68);
+      cursor: pointer;
+      color: var(--ink);
+    }
+    .archive-cluster-link:hover,
+    .archive-cluster-jump:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(31,39,50,.08);
+    }
+    .archive-cluster-link strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.45;
+      margin-bottom: 4px;
+    }
+    .archive-cluster-link span {
+      display: block;
+      color: var(--soft);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
 
     .sticky-stack { position: sticky; top: 98px; display: grid; gap: 18px; }
     .map-panel { overflow: hidden; }
@@ -559,7 +638,28 @@
     .timeline-card[data-group="company"] { border-left: 3px solid rgba(25,50,79,.42); }
     .timeline-card[data-group="validation"] { border-left: 3px solid rgba(45,95,115,.45); }
     .timeline-card[data-group="ai-era"] { border-left: 3px solid rgba(104,92,156,.45); }
+    .timeline-card.is-highlighted {
+      border-color: rgba(180,138,90,.48);
+      box-shadow: 0 0 0 3px rgba(180,138,90,.16), 0 20px 38px rgba(31,39,50,.10);
+      background: rgba(255,255,255,.9);
+    }
     .timeline-card.hidden { display: none; }
+    .timeline-chapter-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(25,50,79,.05);
+      border: 1px solid rgba(25,50,79,.08);
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      width: fit-content;
+    }
 
     .present-wrap { margin-top: 34px; }
     .present-panel {
@@ -875,7 +975,7 @@
       });
     }
 
-    function renderChapters(chapters, sourcesById, artifactsByChapterId, taxonomyById) {
+    function renderChapters(chapters, sourcesById, artifactsByChapterId, taxonomyById, eventsByChapterId) {
       const root = document.getElementById('chapters');
       chapters.forEach((chapter) => {
         const article = make('article', 'card chapter');
@@ -948,6 +1048,37 @@
           sourceRow.append(link);
         });
         article.append(sourceRow);
+
+        const chapterEvents = eventsByChapterId.get(chapter.id) || [];
+        if (chapterEvents.length) {
+          const cluster = make('section', 'archive-cluster');
+          const clusterHeader = make('div', 'archive-cluster-header');
+          const clusterTitle = make('div', 'archive-cluster-title');
+          clusterTitle.append(make('strong', '', 'Supporting archive cluster'));
+          clusterTitle.append(make('span', '', `This chapter is backed by ${chapterEvents.length} reference-grade milestone${chapterEvents.length === 1 ? '' : 's'} in the deeper archive timeline.`));
+          clusterHeader.append(clusterTitle);
+
+          const jump = make('button', 'archive-cluster-jump', 'Open cluster in archive');
+          jump.type = 'button';
+          jump.addEventListener('click', () => {
+            document.getElementById('archiveTimeline')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            focusArchiveEvent(chapterEvents[0].id);
+          });
+          clusterHeader.append(jump);
+          cluster.append(clusterHeader);
+
+          const linkRow = make('div', 'archive-cluster-links');
+          chapterEvents.forEach((event) => {
+            const link = make('button', 'archive-cluster-link');
+            link.type = 'button';
+            link.dataset.archiveTarget = event.id;
+            link.innerHTML = `<span>${formatEventDate(event.start_date)}</span><strong>${event.text.headline}</strong>`;
+            link.addEventListener('click', () => focusArchiveEvent(event.id));
+            linkRow.append(link);
+          });
+          cluster.append(linkRow);
+          article.append(cluster);
+        }
 
         root.append(article);
       });
@@ -1073,6 +1204,44 @@
       return `${year}`;
     }
 
+
+    let highlightedArchiveCard = null;
+
+    function focusArchiveEvent(eventId) {
+      if (!eventId) return;
+      const card = document.querySelector(`[data-event-id="${eventId}"]`);
+      if (!card) return;
+      if (card.classList.contains('hidden')) {
+        card.classList.remove('hidden');
+        card.closest('.timeline-event').style.display = '';
+      }
+      if (highlightedArchiveCard && highlightedArchiveCard !== card) {
+        highlightedArchiveCard.classList.remove('is-highlighted');
+      }
+      highlightedArchiveCard = card;
+      card.classList.add('is-highlighted');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      window.setTimeout(() => {
+        if (highlightedArchiveCard === card) {
+          card.classList.remove('is-highlighted');
+          highlightedArchiveCard = null;
+        }
+      }, 2200);
+    }
+
+    function buildEventsByChapterId(events) {
+      const map = new Map();
+      events.forEach((event) => {
+        if (!event.chapterId) return;
+        if (!map.has(event.chapterId)) map.set(event.chapterId, []);
+        map.get(event.chapterId).push(event);
+      });
+      map.forEach((chapterEvents) => {
+        chapterEvents.sort((a, b) => formatEventDate(a.start_date).localeCompare(formatEventDate(b.start_date)));
+      });
+      return map;
+    }
+
     function renderArchive(events, sourcesById) {
       const timelineRoot = document.getElementById('archiveTimeline');
       const legendRoot = document.getElementById('archiveLegend');
@@ -1158,6 +1327,10 @@
           const card = make('article', 'timeline-card');
           card.dataset.group = group;
           card.dataset.origin = origin;
+          if (event.id) {
+            card.dataset.eventId = event.id;
+            card.id = `archive-${event.id}`;
+          }
 
           const meta = make('div', 'timeline-meta');
           meta.append(make('span', '', formatEventDate(event.start_date)));
@@ -1179,6 +1352,12 @@
               sourceRow.append(link);
             });
             card.append(sourceRow);
+          }
+
+          if (event.chapterId) {
+            const chapterLink = make('a', 'timeline-chapter-link', 'Return to chapter');
+            chapterLink.href = `#${event.chapterId}`;
+            card.append(chapterLink);
           }
 
           stack.append(card);
@@ -1472,13 +1651,14 @@
       const sourcesById = new Map(sources.map((source) => [source.id, source]));
       const taxonomyById = new Map(artifactTaxonomy.map((entry) => [entry.id, entry]));
       const locationById = new Map(locations.map((location) => [location.id, location]));
+      const eventsByChapterId = buildEventsByChapterId(timeline.events);
       const artifactsByChapterId = new Map();
       artifacts.forEach((artifact) => {
         if (!artifactsByChapterId.has(artifact.chapterId)) artifactsByChapterId.set(artifact.chapterId, []);
         artifactsByChapterId.get(artifact.chapterId).push(artifact);
       });
       renderPhaseRail(chapters);
-      renderChapters(chapters, sourcesById, artifactsByChapterId, taxonomyById);
+      renderChapters(chapters, sourcesById, artifactsByChapterId, taxonomyById, eventsByChapterId);
       renderMapNav(chapters, locationById);
       const setActiveLocation = initializeMap(locations, chapters);
       renderValidation(validationGroups);

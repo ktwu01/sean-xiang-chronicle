@@ -27,10 +27,11 @@
   - lightweight artifact/media taxonomy via `data/artifact-taxonomy.json`
   - chapter-specific map captions, camera presets, and active route emphasis
   - present-direction / why-now module via `data/present-direction.json`
+  - chapter-to-archive crosslinks with supporting milestone clusters and archive return links
 
 ## Next implementation steps
 1. Strengthen the source archive further by capturing more direct primary URLs for early academic/founding details.
 2. Deepen the artifact system with real media slots for conference visuals, article snippets, and future scans only where source quality is strong enough.
-3. Add chapter-level map controls or chapter thumbnails so readers can skim the geography layer without full scroll traversal.
-4. Add denser chapter-to-archive crosslinks so the narrative chapters can open directly into their supporting milestone cluster.
+3. Add chapter thumbnails or stronger visual cues to the geography nav so skimming feels more editorial than utility-only.
+4. Add chapter-aware archive filtering so clicking a supporting cluster can temporarily scope the reference timeline to that chapter’s evidence set.
 5. Consider migrating the static prototype into Astro once the content model stabilizes.
