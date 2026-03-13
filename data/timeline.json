@@ -7,137 +7,261 @@
   },
   "events": [
     {
-      "start_date": { "year": "16" },
+      "start_date": {
+        "year": "16"
+      },
       "text": {
         "headline": "Age 16 — USTC",
         "text": "Entered the University of Science and Technology of China (working narrative; source verification pending)."
-      }
+      },
+      "sourceIds": [
+        "dossier",
+        "timeline-v2"
+      ]
     },
     {
-      "start_date": { "year": "1990" },
+      "start_date": {
+        "year": "1990"
+      },
       "text": {
         "headline": "Early Technical Formation",
         "text": "Built the foundation for a long technical trajectory."
-      }
+      },
+      "sourceIds": [
+        "dossier",
+        "timeline-v2"
+      ]
     },
     {
-      "start_date": { "year": "2000" },
+      "start_date": {
+        "year": "2000"
+      },
       "text": {
         "headline": "CUHK PhD",
         "text": "Advanced training in Electrical and Electronic Engineering at The Chinese University of Hong Kong."
-      }
+      },
+      "sourceIds": [
+        "launch-academy",
+        "dossier"
+      ]
     },
     {
-      "start_date": { "year": "2000" },
+      "start_date": {
+        "year": "2000"
+      },
       "text": {
         "headline": "Beckman Laser Institute / UC Irvine",
         "text": "Research chapter in California before the founder arc."
-      }
+      },
+      "sourceIds": [
+        "launch-academy",
+        "dossier"
+      ]
     },
     {
-      "start_date": { "year": "2000" },
+      "start_date": {
+        "year": "2000"
+      },
       "text": {
         "headline": "Bloombase Founded",
         "text": "Co-founded Bloombase in the Silicon Valley / Redwood City context."
-      }
+      },
+      "sourceIds": [
+        "dossier",
+        "timeline-v2"
+      ]
     },
     {
-      "start_date": { "year": "2014", "month": "1", "day": "22" },
+      "start_date": {
+        "year": "2014",
+        "month": "1",
+        "day": "22"
+      },
       "text": {
         "headline": "VMware Technology Alliance",
         "text": "Bloombase joins VMware Technology Alliance Partner Program."
-      }
+      },
+      "sourceIds": [
+        "vmware-2014"
+      ]
     },
     {
-      "start_date": { "year": "2014", "month": "11", "day": "18" },
+      "start_date": {
+        "year": "2014",
+        "month": "11",
+        "day": "18"
+      },
       "text": {
         "headline": "Hitachi Alliance",
         "text": "Bloombase joins Hitachi Data Systems' Technology Alliance Program."
-      }
+      },
+      "sourceIds": [
+        "hitachi-2014"
+      ]
     },
     {
-      "start_date": { "year": "2015", "month": "9", "day": "1" },
+      "start_date": {
+        "year": "2015",
+        "month": "9",
+        "day": "1"
+      },
       "text": {
         "headline": "HP ESKM Interoperability",
         "text": "StoreSafe certified interoperable with HP Enterprise Secure Key Manager."
-      }
+      },
+      "sourceIds": [
+        "hp-2015"
+      ]
     },
     {
-      "start_date": { "year": "2015", "month": "11", "day": "2" },
+      "start_date": {
+        "year": "2015",
+        "month": "11",
+        "day": "2"
+      },
       "text": {
         "headline": "Thales ASAP Alliance",
         "text": "Bloombase joins Thales ASAP alliance."
-      }
+      },
+      "sourceIds": [
+        "thales-2015"
+      ]
     },
     {
-      "start_date": { "year": "2015", "month": "12", "day": "3" },
+      "start_date": {
+        "year": "2015",
+        "month": "12",
+        "day": "3"
+      },
       "text": {
         "headline": "HPE Helion Ready / ArcSight",
         "text": "Cloud and security certification milestone."
-      }
+      },
+      "sourceIds": [
+        "hpe-2015"
+      ]
     },
     {
-      "start_date": { "year": "2017", "month": "3", "day": "20" },
+      "start_date": {
+        "year": "2017",
+        "month": "3",
+        "day": "20"
+      },
       "text": {
         "headline": "IBM Validation",
         "text": "StoreSafe receives IBM Ready for Security Intelligence validation."
-      }
+      },
+      "sourceIds": [
+        "ibm-2017"
+      ]
     },
     {
-      "start_date": { "year": "2018", "month": "7", "day": "9" },
+      "start_date": {
+        "year": "2018",
+        "month": "7",
+        "day": "9"
+      },
       "text": {
         "headline": "VMware Cloud on AWS",
         "text": "StoreSafe for VMware Cloud on AWS announced."
-      }
+      },
+      "sourceIds": [
+        "vmware-aws-2018"
+      ]
     },
     {
-      "start_date": { "year": "2018", "month": "8", "day": "27" },
+      "start_date": {
+        "year": "2018",
+        "month": "8",
+        "day": "27"
+      },
       "text": {
         "headline": "Canada Expansion Story",
         "text": "Launch Academy / Maple public expansion chapter."
-      }
+      },
+      "sourceIds": [
+        "launch-academy"
+      ]
     },
     {
-      "start_date": { "year": "2019", "month": "1", "day": "22" },
+      "start_date": {
+        "year": "2019",
+        "month": "1",
+        "day": "22"
+      },
       "text": {
         "headline": "Azure Marketplace",
         "text": "Bloombase StoreSafe available in Microsoft Azure Marketplace."
-      }
+      },
+      "sourceIds": [
+        "azure-2019"
+      ]
     },
     {
-      "start_date": { "year": "2019", "month": "10", "day": "21" },
+      "start_date": {
+        "year": "2019",
+        "month": "10",
+        "day": "21"
+      },
       "text": {
         "headline": "nCipher Collaboration",
         "text": "Cloud data-at-rest protection collaboration."
-      }
+      },
+      "sourceIds": [
+        "ncipher-2019"
+      ]
     },
     {
-      "start_date": { "year": "2020", "month": "2", "day": "18" },
+      "start_date": {
+        "year": "2020",
+        "month": "2",
+        "day": "18"
+      },
       "text": {
         "headline": "Futurex Collaboration",
         "text": "Security partnership milestone."
-      }
+      },
+      "sourceIds": [
+        "futurex-2020"
+      ]
     },
     {
-      "start_date": { "year": "2023" },
+      "start_date": {
+        "year": "2023"
+      },
       "text": {
         "headline": "NVIDIA DPU / GPU Era",
         "text": "Rebuilding Bloombase data-at-rest security with NVIDIA DPUs and GPUs."
-      }
+      },
+      "sourceIds": [
+        "nvidia-2023"
+      ]
     },
     {
-      "start_date": { "year": "2024" },
+      "start_date": {
+        "year": "2024"
+      },
       "text": {
         "headline": "Conference / Ecosystem Visibility",
         "text": "RSA, GTC, MWC, CYBERSEC and broader public ecosystem presence."
-      }
+      },
+      "sourceIds": [
+        "dossier"
+      ]
     },
     {
-      "start_date": { "year": "2025", "month": "4", "day": "29" },
+      "start_date": {
+        "year": "2025",
+        "month": "4",
+        "day": "29"
+      },
       "text": {
         "headline": "Utimaco Alliance",
         "text": "Alliance focused on AI-era data security solutions."
-      }
+      },
+      "sourceIds": [
+        "utimaco-2025"
+      ]
     }
   ]
 }

@@ -23,10 +23,14 @@
   - denser reference timeline sourced from `data/timeline.json`
   - source archive
   - source-backed editorial artifact cards for the strongest chapters
+  - archive timeline sourcing labels + source-origin filters
+  - lightweight artifact/media taxonomy via `data/artifact-taxonomy.json`
+  - chapter-specific map captions, camera presets, and active route emphasis
+  - present-direction / why-now module via `data/present-direction.json`
 
 ## Next implementation steps
 1. Strengthen the source archive further by capturing more direct primary URLs for early academic/founding details.
-2. Add a lightweight artifact/media taxonomy so chapters can distinguish article snippets, announcements, conference appearances, and future image assets.
-3. Refine the map chapter experience with tighter camera presets and subtle chapter-to-route emphasis instead of a single global route treatment.
-4. Introduce a stronger chapter-end CTA / present-direction module so the chronicle lands on why Sean Xiang matters now.
+2. Deepen the artifact system with real media slots for conference visuals, article snippets, and future scans only where source quality is strong enough.
+3. Add chapter-level map controls or chapter thumbnails so readers can skim the geography layer without full scroll traversal.
+4. Add denser chapter-to-archive crosslinks so the narrative chapters can open directly into their supporting milestone cluster.
 5. Consider migrating the static prototype into Astro once the content model stabilizes.

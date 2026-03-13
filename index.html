@@ -415,11 +415,24 @@
       line-height: 1.7;
       margin: 0;
     }
-    .archive-legend {
+    .archive-controls {
+      display: grid;
+      gap: 12px;
+      justify-items: end;
+    }
+    .archive-filter-group {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       justify-content: flex-end;
+      align-items: center;
+    }
+    .archive-filter-label {
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-right: 4px;
     }
     .legend-chip {
       padding: 8px 10px;
@@ -508,6 +521,38 @@
       margin: 0;
       color: var(--muted);
       line-height: 1.72;
+    }
+    .timeline-sources {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .timeline-source-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(25,50,79,.08);
+      background: rgba(25,50,79,.04);
+      color: var(--accent);
+    }
+    .timeline-source-pill[data-origin='first-party'] {
+      background: rgba(180,138,90,.12);
+      color: #6f532f;
+    }
+    .timeline-source-pill[data-origin='third-party'] {
+      background: rgba(45,95,115,.09);
+      color: #214c5e;
+    }
+    .timeline-source-pill[data-origin='internal'] {
+      background: rgba(25,50,79,.06);
+      color: var(--accent);
     }
     .timeline-card[data-group="formation"] { border-left: 3px solid rgba(180,138,90,.55); }
     .timeline-card[data-group="research"] { border-left: 3px solid rgba(87,110,150,.45); }
@@ -635,7 +680,8 @@
       .hero, .overview, .main-grid, .archive-header, .present-grid { grid-template-columns: 1fr; }
       .sticky-stack { position: static; }
       .phase-rail ol { grid-template-columns: repeat(3, minmax(0,1fr)); }
-      .archive-legend { justify-content: flex-start; }
+      .archive-controls { justify-items: start; }
+      .archive-filter-group { justify-content: flex-start; }
     }
 
     @media (max-width: 700px) {
@@ -772,7 +818,10 @@
               The main chapters are deliberately selective. This archive view exposes the deeper milestone layer from the existing timeline dataset so the site can support both skim mode and research mode.
             </p>
           </div>
-          <div class="archive-legend" id="archiveLegend"></div>
+          <div class="archive-controls">
+            <div class="archive-filter-group" id="archiveLegend"></div>
+            <div class="archive-filter-group" id="archiveSourceFilters"></div>
+          </div>
         </div>
         <div class="archive-timeline" id="archiveTimeline"></div>
       </article>
@@ -1024,9 +1073,10 @@
       return `${year}`;
     }
 
-    function renderArchive(events) {
+    function renderArchive(events, sourcesById) {
       const timelineRoot = document.getElementById('archiveTimeline');
       const legendRoot = document.getElementById('archiveLegend');
+      const sourceFilterRoot = document.getElementById('archiveSourceFilters');
       const groups = [
         ['all', 'All'],
         ['formation', 'Formation'],
@@ -1035,23 +1085,53 @@
         ['validation', 'Validation'],
         ['ai-era', 'AI era']
       ];
+      const sourceOrigins = [
+        ['all', 'All sources'],
+        ['first-party', 'First-party'],
+        ['third-party', 'Third-party'],
+        ['internal', 'Working notes']
+      ];
+      const filters = { group: 'all', origin: 'all' };
+
+      const groupLabel = make('span', 'archive-filter-label', 'Story layer');
+      legendRoot.append(groupLabel);
+      const originLabel = make('span', 'archive-filter-label', 'Source origin');
+      sourceFilterRoot.append(originLabel);
+
+      function applyArchiveFilters() {
+        document.querySelectorAll('.timeline-card').forEach((card) => {
+          const matchesGroup = filters.group === 'all' || card.dataset.group === filters.group;
+          const matchesOrigin = filters.origin === 'all' || card.dataset.origin === filters.origin;
+          card.classList.toggle('hidden', !(matchesGroup && matchesOrigin));
+        });
+        document.querySelectorAll('.timeline-event').forEach((eventEl) => {
+          const visibleCards = Array.from(eventEl.querySelectorAll('.timeline-card')).filter((card) => !card.classList.contains('hidden'));
+          eventEl.style.display = visibleCards.length ? '' : 'none';
+        });
+      }
 
       groups.forEach(([value, label], index) => {
         const button = make('button', `legend-chip${index === 0 ? ' active' : ''}`, label);
         button.type = 'button';
         button.dataset.filter = value;
         button.addEventListener('click', () => {
-          document.querySelectorAll('.legend-chip').forEach((chip) => chip.classList.toggle('active', chip === button));
-          document.querySelectorAll('.timeline-card').forEach((card) => {
-            const shouldShow = value === 'all' || card.dataset.group === value;
-            card.classList.toggle('hidden', !shouldShow);
-          });
-          document.querySelectorAll('.timeline-event').forEach((eventEl) => {
-            const visibleCards = Array.from(eventEl.querySelectorAll('.timeline-card')).filter((card) => !card.classList.contains('hidden'));
-            eventEl.style.display = visibleCards.length ? '' : 'none';
-          });
+          filters.group = value;
+          legendRoot.querySelectorAll('.legend-chip').forEach((chip) => chip.classList.toggle('active', chip === button));
+          applyArchiveFilters();
         });
         legendRoot.append(button);
+      });
+
+      sourceOrigins.forEach(([value, label], index) => {
+        const button = make('button', `legend-chip${index === 0 ? ' active' : ''}`, label);
+        button.type = 'button';
+        button.dataset.originFilter = value;
+        button.addEventListener('click', () => {
+          filters.origin = value;
+          sourceFilterRoot.querySelectorAll('.legend-chip').forEach((chip) => chip.classList.toggle('active', chip === button));
+          applyArchiveFilters();
+        });
+        sourceFilterRoot.append(button);
       });
 
       const byYear = new Map();
@@ -1072,21 +1152,43 @@
           const headline = event.text.headline;
           const text = event.text.text;
           const group = classifyEvent(headline, text);
+          const eventSources = (event.sourceIds || []).map((sourceId) => sourcesById.get(sourceId)).filter(Boolean);
+          const primarySource = eventSources.find((source) => source.publisherType === 'first-party') || eventSources[0];
+          const origin = primarySource?.publisherType || 'internal';
           const card = make('article', 'timeline-card');
           card.dataset.group = group;
+          card.dataset.origin = origin;
 
           const meta = make('div', 'timeline-meta');
           meta.append(make('span', '', formatEventDate(event.start_date)));
           meta.append(make('span', '', group.replace('-', ' ')));
+          if (primarySource?.publisherLabel) meta.append(make('span', '', primarySource.publisherLabel));
+          if (primarySource?.evidenceLabel) meta.append(make('span', '', primarySource.evidenceLabel));
           card.append(meta);
           card.append(make('h3', '', headline));
           card.append(make('p', '', text));
+
+          if (eventSources.length) {
+            const sourceRow = make('div', 'timeline-sources');
+            eventSources.forEach((source) => {
+              const link = make('a', 'timeline-source-pill', source.label);
+              link.href = source.url;
+              link.dataset.origin = source.publisherType || 'internal';
+              link.target = source.url.startsWith('http') ? '_blank' : '_self';
+              if (link.target === '_blank') link.rel = 'noreferrer';
+              sourceRow.append(link);
+            });
+            card.append(sourceRow);
+          }
+
           stack.append(card);
         });
 
         row.append(stack);
         timelineRoot.append(row);
       });
+
+      applyArchiveFilters();
     }
 
     function buildJourneyStages(chapters, locationById) {
@@ -1380,7 +1482,7 @@
       renderMapNav(chapters, locationById);
       const setActiveLocation = initializeMap(locations, chapters);
       renderValidation(validationGroups);
-      renderArchive(timeline.events);
+      renderArchive(timeline.events, sourcesById);
       renderPresentDirection(presentDirection, sourcesById);
       renderSources(sources);
       activateScrollSync(chapters, setActiveLocation);

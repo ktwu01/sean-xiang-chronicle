@@ -15,6 +15,8 @@
       "Editorial role: establish unusual trajectory before the founder story begins."
     ],
     "locationId": "hong-kong",
+    "mapCaption": "The opening map beat is intentionally restrained: Hong Kong stands in for the first well-supported academic region while the earliest acceleration story remains carefully sourced.",
+    "mapCamera": { "center": [113.5, 23.0], "zoom": 4.35, "pitch": 18, "bearing": -10 },
     "sources": ["dossier", "timeline-v2"]
   },
   {
@@ -33,6 +35,8 @@
       "Narrative function: explain later durability in security and infrastructure markets."
     ],
     "locationId": "hong-kong",
+    "mapCaption": "The camera tightens around Hong Kong once the record becomes firmer: this is the strongest publicly documented anchor for Sean Xiang’s technical formation.",
+    "mapCamera": { "center": [114.1694, 22.3193], "zoom": 5.15, "pitch": 34, "bearing": 6 },
     "sources": ["launch-academy", "timeline-v2"]
   },
   {
@@ -51,6 +55,8 @@
       "Narrative function: connect academic depth to founder execution."
     ],
     "locationId": "irvine",
+    "mapCaption": "This is the first real geographic jump in the chronicle: from academic formation in Hong Kong into a California research institution that makes the founder arc easier to see.",
+    "mapCamera": { "center": [-118.5, 34.0], "zoom": 5.45, "pitch": 30, "bearing": -18 },
     "sources": ["launch-academy", "dossier"]
   },
   {
@@ -69,6 +75,8 @@
       "Narrative function: establish the company as the spine of the chronicle, not just one milestone among many."
     ],
     "locationId": "redwood-city",
+    "mapCaption": "The map shifts north into the Peninsula: not for spectacle, but to mark the moment the research path hardens into a company built for enterprise trust.",
+    "mapCamera": { "center": [-122.05, 37.35], "zoom": 6.1, "pitch": 28, "bearing": -22 },
     "sources": ["dossier", "timeline-v2"]
   },
   {
@@ -87,6 +95,8 @@
       "2017–2020: IBM validation, VMware Cloud on AWS, Azure Marketplace, nCipher, Futurex."
     ],
     "locationId": "redwood-city",
+    "mapCaption": "The location stays anchored in Silicon Valley while the map emphasis shifts from movement to density: this chapter is about staying put long enough to accumulate interoperability proof.",
+    "mapCamera": { "center": [-121.7, 37.45], "zoom": 5.45, "pitch": 44, "bearing": -8 },
     "sources": ["vmware-2014", "hitachi-2014", "hp-2015", "thales-2015", "hpe-2015", "ibm-2017", "vmware-aws-2018", "azure-2019", "ncipher-2019", "futurex-2020"]
   },
   {
@@ -105,6 +115,8 @@
       "Narrative function: show institutional and market movement, not just travel."
     ],
     "locationId": "vancouver",
+    "mapCaption": "The Vancouver move is a strategic widening, not a decorative international pin — a source-backed expansion story about talent, cryptography, and ecosystem positioning.",
+    "mapCamera": { "center": [-123.1207, 49.2827], "zoom": 5.25, "pitch": 32, "bearing": 14 },
     "sources": ["launch-academy", "timeline-v2"]
   },
   {
@@ -123,6 +135,8 @@
       "2025 Utimaco alliance focused on AI-era data security."
     ],
     "locationId": "global-ai",
+    "mapCaption": "The last map state deliberately breaks from single-city biography. The story becomes distributed across accelerator, cloud, conference, and cryptographic ecosystems.",
+    "mapCamera": { "center": [8, 24], "zoom": 1.35, "pitch": 10, "bearing": 0 },
     "sources": ["nvidia-2023", "utimaco-2025", "dossier"]
   }
 ]
