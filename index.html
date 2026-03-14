@@ -450,6 +450,11 @@
     .ledger-card[data-tone="primary"] { border-color: rgba(45,95,115,.18); }
     .ledger-card[data-tone="context"] { border-color: rgba(180,138,90,.24); }
     .ledger-card[data-tone="working"] { border-color: rgba(104,92,156,.16); }
+    .ledger-card.is-active {
+      border-color: rgba(25,50,79,.18);
+      box-shadow: 0 18px 36px rgba(25,50,79,.10), inset 0 1px 0 rgba(255,255,255,.45);
+      transform: translateY(-2px);
+    }
     .ledger-topline {
       display: flex;
       flex-wrap: wrap;
@@ -2508,9 +2513,9 @@
     <section class="ledger-wrap">
       <article class="card ledger-panel">
         <div class="section-label">Evidence ledger</div>
-        <h2>The source posture of each chapter, before the reader enters the full chronology</h2>
+        <h2>A chapter dossier for every phase, so deep mode feels curated before the full chronology opens</h2>
         <p class="ledger-intro">
-          This adds a premium middle layer between the thesis and the long-form narrative: each chapter now has a visible evidence posture, archive density, and capture backlog. It keeps the chronicle honest while making the information architecture feel curated instead of improvised.
+          This now behaves like a real chapter dossier layer, not just a scorecard. Each card combines evidence posture, archive density, strongest current anchor, matching exhibit cues, and the next capture target so deep-mode readers can stay oriented before opening the full chronology.
         </p>
         <div class="ledger-grid" id="chapterLedger"></div>
       </article>
@@ -2918,11 +2923,11 @@
       const buttons = Array.from(document.querySelectorAll('.reader-mode-button'));
       const modeCopy = {
         skim: 'Skim mode keeps the founder thesis, chapter arc, map, and validation surface in view. Deep mode opens the full exhibit, archive, and source desk for readers who want to audit the record.',
-        deep: 'Deep mode turns the page into a source-backed editorial desk: exhibits, archive chronology, roadmap, and source explorer all stay in play alongside the chapter narrative.'
+        deep: 'Deep mode turns the page into a source-backed editorial desk: chapter dossiers, exhibits, archive chronology, roadmap, and source explorer all stay in play alongside the chapter narrative.'
       };
       const modePills = {
         skim: ['Fast read', 'Narrative chapters', 'Map + validation'],
-        deep: ['Full exhibits', 'Reference timeline', 'Source archive']
+        deep: ['Chapter dossiers', 'Full exhibits', 'Source archive']
       };
 
       function setMode(mode) {
@@ -3113,7 +3118,7 @@
       return strip;
     }
 
-    function renderChapterLedger(chapters, sourcesById, eventsByChapterId, artifactsByChapterId, roadmap, openArchiveScope) {
+    function renderChapterLedger(chapters, sourcesById, eventsByChapterId, artifactsByChapterId, roadmap, openArchiveScope, deepBriefs, exhibits, publicRecordLedger) {
       const root = document.getElementById('chapterLedger');
       if (!root) return;
       const roadmapByChapter = new Map();
@@ -3121,12 +3126,32 @@
         if (!roadmapByChapter.has(entry.chapterId)) roadmapByChapter.set(entry.chapterId, []);
         roadmapByChapter.get(entry.chapterId).push(entry);
       });
+      const briefByChapter = new Map((deepBriefs || []).map((brief) => [brief.chapterId, brief]));
+      const exhibitByChapter = new Map((exhibits || []).map((exhibit) => [exhibit.chapterId, exhibit]));
+      const ledgerByChapter = new Map();
+      (publicRecordLedger || []).forEach((ledger) => {
+        (ledger.entries || []).forEach((item) => {
+          if (!item.chapterId) return;
+          if (!ledgerByChapter.has(item.chapterId)) ledgerByChapter.set(item.chapterId, []);
+          ledgerByChapter.get(item.chapterId).push(item);
+        });
+      });
 
       const auditRows = buildChapterAudit(chapters, sourcesById, eventsByChapterId, artifactsByChapterId);
+      const cardsByChapter = new Map();
       auditRows.forEach((entry) => {
         const chapter = entry.chapter;
+        const brief = briefByChapter.get(chapter.id);
+        const exhibit = exhibitByChapter.get(chapter.id);
+        const recordEntry = (ledgerByChapter.get(chapter.id) || [])[0];
+        const chapterSources = (chapter.sources || []).map((id) => sourcesById.get(id)).filter(Boolean);
+        const bestAnchor = chapterSources.slice().sort((a, b) => {
+          const rank = { direct: 0, context: 1, working: 2 };
+          return (rank[a.verificationState] ?? 3) - (rank[b.verificationState] ?? 3);
+        })[0];
         const card = make('article', 'ledger-card');
         card.dataset.tone = entry.tone;
+        card.dataset.chapter = chapter.id;
 
         const topline = make('div', 'ledger-topline');
         const phase = make('span', 'artifact-pill', `${chapter.phase} - ${chapter.range}`);
@@ -3140,17 +3165,22 @@
           gap.dataset.tone = 'context';
           topline.append(gap);
         }
+        if (exhibit) {
+          const exhibitPill = make('span', 'artifact-pill', 'Matched exhibit');
+          exhibitPill.dataset.tone = 'evidence';
+          topline.append(exhibitPill);
+        }
         card.append(topline);
 
-        card.append(make('h3', '', chapter.title));
-        card.append(make('p', '', chapter.dek));
+        card.append(make('h3', '', brief?.title || chapter.title));
+        card.append(make('p', '', brief?.summary || chapter.dek));
 
         const metrics = make('div', 'ledger-metrics');
         [
           ['Source mix', `${entry.primaryCount} direct / ${entry.contextCount} bridge / ${entry.workingCount} working`],
           ['Archive density', `${entry.eventCount} timeline event${entry.eventCount === 1 ? '' : 's'} / ${entry.artifactCount} artifact${entry.artifactCount === 1 ? '' : 's'}`],
-          ['Editorial stance', chapter.evidenceProfile?.stance || 'Evidence posture forming'],
-          ['Upgrade threshold', chapter.evidenceProfile?.artifact || 'Needs stronger primary proof before richer treatment']
+          ['Strongest anchor', bestAnchor ? bestAnchor.label : 'Working synthesis still leads this chapter'],
+          ['Public-record cue', recordEntry ? `${recordEntry.dateLabel} ? ${recordEntry.title}` : 'No chapter-specific ledger cue yet']
         ].forEach(([label, value]) => {
           const metric = make('div', 'ledger-metric');
           metric.append(make('strong', '', label));
@@ -3159,9 +3189,17 @@
         });
         card.append(metrics);
 
+        const focusNote = make('div', 'ledger-gap', brief?.whyDeep || brief?.evidenceMove || chapter.evidenceProfile?.stance || 'Evidence posture forming');
+        card.append(focusNote);
+
+        if (exhibit) {
+          const exhibitNote = make('div', 'ledger-gap', `Exhibit cue: ${exhibit.title}. ${exhibit.summary}`);
+          card.append(exhibitNote);
+        }
+
         const topRoadmap = (roadmapByChapter.get(chapter.id) || [])[0];
         if (topRoadmap) {
-          const gap = make('div', 'ledger-gap', `${topRoadmap.priority} priority evidence gap: ${topRoadmap.title}. ${topRoadmap.desiredEvidence}.`);
+          const gap = make('div', 'ledger-gap', `${topRoadmap.priority} priority capture: ${topRoadmap.title}. ${topRoadmap.desiredEvidence}.`);
           card.append(gap);
         }
 
@@ -3176,8 +3214,21 @@
 
         const archive = make('button', 'ledger-action', 'Open archive evidence');
         archive.type = 'button';
-        archive.addEventListener('click', () => openArchiveScope?.(chapter.id));
+        archive.addEventListener('click', () => {
+          window.setReadingMode?.('deep');
+          openArchiveScope?.(chapter.id);
+        });
         actions.append(archive);
+
+        if (exhibit) {
+          const exhibitButton = make('button', 'ledger-action', 'Open matching exhibit');
+          exhibitButton.type = 'button';
+          exhibitButton.addEventListener('click', () => {
+            window.setReadingMode?.('deep');
+            document.getElementById(`exhibit-${exhibit.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          });
+          actions.append(exhibitButton);
+        }
 
         if (topRoadmap) {
           const roadmapButton = make('button', 'ledger-action', 'View capture target');
@@ -3190,6 +3241,14 @@
 
         card.append(actions);
         root.append(card);
+        cardsByChapter.set(chapter.id, card);
+      });
+
+      const firstChapterId = chapters[0]?.id;
+      if (firstChapterId && cardsByChapter.has(firstChapterId)) cardsByChapter.get(firstChapterId).classList.add('is-active');
+      window.addEventListener('chronicle:focus-chapter', (event) => {
+        const chapterId = event.detail?.chapterId;
+        cardsByChapter.forEach((card, id) => card.classList.toggle('is-active', id === chapterId));
       });
     }
 
@@ -4923,7 +4982,7 @@
       const archiveApi = renderArchive(timeline.events, sourcesById, chaptersById);
       renderChapterCompass(chapters, sourcesById, eventsByChapterId, artifactsByChapterId, sourceRoadmap, archiveApi.openArchiveScope);
       renderDeepBriefs(deepBriefs, chaptersById, sourcesById, sourceRoadmap);
-      renderChapterLedger(chapters, sourcesById, eventsByChapterId, artifactsByChapterId, sourceRoadmap, archiveApi.openArchiveScope);
+      renderChapterLedger(chapters, sourcesById, eventsByChapterId, artifactsByChapterId, sourceRoadmap, archiveApi.openArchiveScope, deepBriefs, exhibits, publicRecordLedger);
       renderChapters(chapters, sourcesById, artifactsByChapterId, taxonomyById, eventsByChapterId, archiveApi.openArchiveScope);
       renderMapNav(chapters, locationById, eventsByChapterId, sourcesById);
       const setActiveLocation = initializeMap(locations, chapters);
