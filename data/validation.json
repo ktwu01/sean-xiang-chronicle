@@ -39,7 +39,7 @@
   {
     "group": "Security & HSM trust layer",
     "summary": "The strongest middle-years pattern is trust infrastructure: key management, HSM adjacency, and cryptographic ecosystems where novelty matters less than assurance.",
-    "metric": "2015-2025 - key custody and trust",
+    "metric": "2015-2025 ? key custody and trust",
     "items": [
       {
         "label": "HP Enterprise Secure Key Manager",
@@ -52,6 +52,12 @@
         "year": "2015",
         "sourceId": "thales-2015",
         "note": "Places Bloombase inside a recognizable encryption and cloud-security ecosystem."
+      },
+      {
+        "label": "Ultra Electronics AEP / Keyper",
+        "year": "2016",
+        "sourceId": "ultra-2016",
+        "note": "Extends the trust-layer story with explicit HSM interoperability and key-custody language."
       },
       {
         "label": "nCipher collaboration",
@@ -95,6 +101,12 @@
         "year": "2014",
         "sourceId": "hitachi-2014",
         "note": "Adds breadth across enterprise storage environments."
+      },
+      {
+        "label": "ATTO interoperability",
+        "year": "2017",
+        "sourceId": "atto-2017",
+        "note": "Shows the validation arc persisting into storage-networking infrastructure rather than stopping at early alliance announcements."
       },
       {
         "label": "NVIDIA DPU / GPU security framing",

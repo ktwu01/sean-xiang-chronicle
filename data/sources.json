@@ -397,5 +397,43 @@
     "claimScopeLabel": "Ecosystem proof",
     "verificationState": "direct",
     "verificationStateLabel": "Direct claim support"
+  },
+  {
+    "id": "ultra-2016",
+    "label": "Ultra Electronics AEP Keyper HSM interoperability (2016-06-13)",
+    "url": "https://www.bloombase.com/news_and_events/20160613-1.html",
+    "note": "Direct Bloombase release tying StoreSafe to Ultra Electronics AEP Keyper HSMs and framing cross-vendor trust infrastructure in explicit enterprise terms.",
+    "category": "alliance",
+    "categoryLabel": "Alliance announcement",
+    "publisherType": "first-party",
+    "publisherLabel": "Bloombase release",
+    "evidenceLevel": "primary",
+    "evidenceLabel": "Primary source",
+    "year": "2016",
+    "directnessLabel": "Direct company URL",
+    "artifactReadinessLabel": "Primary artifact ready",
+    "claimScope": "ecosystem proof",
+    "claimScopeLabel": "Ecosystem proof",
+    "verificationState": "direct",
+    "verificationStateLabel": "Direct claim support"
+  },
+  {
+    "id": "atto-2017",
+    "label": "ATTO interoperability certification (2017-07-17)",
+    "url": "https://www.bloombase.com/news_and_events/20170717-1.html",
+    "note": "Direct Bloombase release showing continued data-at-rest interoperability work across SAN, NAS, and high-speed storage connectivity infrastructure.",
+    "category": "certification",
+    "categoryLabel": "Certification / interoperability",
+    "publisherType": "first-party",
+    "publisherLabel": "Bloombase release",
+    "evidenceLevel": "primary",
+    "evidenceLabel": "Primary source",
+    "year": "2017",
+    "directnessLabel": "Direct company URL",
+    "artifactReadinessLabel": "Primary artifact ready",
+    "claimScope": "ecosystem proof",
+    "claimScopeLabel": "Ecosystem proof",
+    "verificationState": "direct",
+    "verificationStateLabel": "Direct claim support"
   }
 ]

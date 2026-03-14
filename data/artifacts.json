@@ -315,5 +315,35 @@
         "tone": "primary"
       }
     ]
+  },
+  {
+    "id": "ultra-2016-artifact",
+    "chapterId": "enterprise-validation",
+    "type": "alliance-announcement",
+    "eyebrow": "Trust-layer milestone ? 2016",
+    "title": "Ultra Electronics AEP turns the middle years into a real key-custody chapter",
+    "excerpt": "The 2016 Ultra Electronics AEP release deepens the validation story because it is not just another platform badge. It explicitly frames hardened key storage, HSM interoperability, and enterprise-grade flexibility as part of the Bloombase narrative.",
+    "caption": "This keeps the validation chapter from flattening into generic ecosystem repetition. The trust surface changes: now the chronicle is about key custody, HSM posture, and cross-vendor security architecture.",
+    "sourceId": "ultra-2016",
+    "mediaLabel": "HSM trust card",
+    "supportLabel": "Key custody signal",
+    "displayMode": "document",
+    "visualTitle": "Ultra Electronics AEP / Keyper interoperability",
+    "visualText": "2016-06-13 ? Direct Bloombase release ties StoreSafe to hardened HSM-backed key storage and large-scale enterprise deployment concerns."
+  },
+  {
+    "id": "atto-2017-artifact",
+    "chapterId": "enterprise-validation",
+    "type": "platform-proof",
+    "eyebrow": "Infrastructure milestone ? 2017",
+    "title": "ATTO certification shows the story reaching storage-networking infrastructure, not only software alliances",
+    "excerpt": "The 2017 ATTO certification matters because it widens the validation trail into Fibre Channel, Ethernet adapters, SAN, and NAS ? another trust surface in the enterprise data path.",
+    "caption": "Editorially, this helps the middle years read like a sequence of infrastructure proofs across different layers of the stack rather than a single repeated partnership pattern.",
+    "sourceId": "atto-2017",
+    "mediaLabel": "Interoperability bulletin card",
+    "supportLabel": "Infrastructure continuity signal",
+    "displayMode": "document",
+    "visualTitle": "ATTO interoperability certification",
+    "visualText": "2017-07-17 ? Bloombase frames StoreSafe as interoperable with high-speed storage-networking hardware across SAN and NAS environments."
   }
 ]

@@ -38,6 +38,7 @@
 - artifact system upgraded to support multi-source editorial artifacts and richer chapter treatments for geography + AI-era signal stacks
 - new evidence-exhibit layer added between narrative chapters and the archive, grouping the strongest source-backed artifacts into editorial desk-style exhibit cards with chapter/archive jumps and provenance links
 - artifact visual system upgraded again with source-backed media decks, so strong chapters can carry richer article-snippet / conference-visual / future-scan slots without resorting to toy placeholder imagery
+- source archive and validation arc expanded with additional direct Bloombase primary URLs for 2016 (Ultra Electronics AEP / Keyper HSM interoperability) and 2017 (ATTO interoperability), plus corresponding timeline and exhibit coverage
 
 ## Next implementation steps
 1. Strengthen the source archive further by capturing more direct primary URLs for early academic details, especially anything tighter than the current profile-level CUHK / Beckman trail.

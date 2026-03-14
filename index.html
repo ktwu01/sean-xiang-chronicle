@@ -1220,7 +1220,7 @@
     .sources-wrap { margin-top: 34px; }
     .source-summary {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 12px;
       margin-top: 18px;
     }
@@ -1870,24 +1870,7 @@
             The story reads best as durable technical depth compounding into company-building, ecosystem trust, and a present-tense AI-security chapter — not as a vanity profile.
           </p>
         </div>
-        <div class="thesis-grid">
-          <div class="stat">
-            <strong>7</strong>
-            <span>Editorial chapters with distinct narrative roles rather than a flat milestone list.</span>
-          </div>
-          <div class="stat">
-            <strong>4+1</strong>
-            <span>Real mapped anchors, plus a deliberate global view for the distributed AI-infrastructure chapter.</span>
-          </div>
-          <div class="stat">
-            <strong>19</strong>
-            <span>Reference-grade archive events for readers who want more than a curated narrative layer.</span>
-          </div>
-          <div class="stat">
-            <strong>14</strong>
-            <span>Source references surfaced in the archive, including the direct 2025 Utimaco announcement page.</span>
-          </div>
-        </div>
+        <div class="thesis-grid" id="heroStats"></div>
       </aside>
     </section>
 
@@ -2090,6 +2073,28 @@
         a.innerHTML = `<span class="phase-kicker">${chapter.range}</span><strong>${chapter.phase}</strong>`;
         li.appendChild(a);
         rail.appendChild(li);
+      });
+    }
+
+    function renderHeroStats(chapters, locations, timeline, sources) {
+      const root = document.getElementById('heroStats');
+      if (!root) return;
+      const mappedAnchors = locations.filter((location) => Number.isFinite(location.lat) && Number.isFinite(location.lon) && !(location.lat === 0 && location.lon === 0)).length;
+      const distributedCount = locations.length - mappedAnchors;
+      const directSources = sources.filter((source) => source.verificationState === 'direct').length;
+      const undatedEvents = timeline.events.filter((event) => !event.start_date?.year).length;
+      const stats = [
+        [String(chapters.length), 'Editorial chapters with distinct narrative roles rather than a flat milestone list.'],
+        [`${mappedAnchors}+${distributedCount}`, 'Real mapped anchors, plus a deliberate distributed view for the AI-infrastructure chapter.'],
+        [String(timeline.events.length), `Reference-grade archive events, including ${undatedEvents} deliberately restrained early milestones still awaiting tighter public proof.`],
+        [String(directSources), 'Direct claim-supporting sources surfaced in the archive, separate from bridge context and working synthesis.']
+      ];
+
+      stats.forEach(([value, text]) => {
+        const stat = make('div', 'stat');
+        stat.append(make('strong', '', value));
+        stat.append(make('span', '', text));
+        root.append(stat);
       });
     }
 
@@ -3817,6 +3822,7 @@
         artifactsByChapterId.get(artifact.chapterId).push(artifact);
       });
       renderPhaseRail(chapters);
+      renderHeroStats(chapters, locations, timeline, sources);
       const archiveApi = renderArchive(timeline.events, sourcesById, chaptersById);
       renderChapterLedger(chapters, sourcesById, eventsByChapterId, artifactsByChapterId, sourceRoadmap, archiveApi.openArchiveScope);
       renderChapters(chapters, sourcesById, artifactsByChapterId, taxonomyById, eventsByChapterId, archiveApi.openArchiveScope);

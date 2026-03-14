@@ -6,7 +6,7 @@
     "title": "An accelerated technical trajectory starts early",
     "dek": "The opening frame is not just that Sean Xiang became a founder, but that his path appears to have started on an unusually compressed academic and technical timeline.",
     "narrative": [
-      "The public story begins with an early-start reputation: a technical path that separated from the ordinary cadence well before the founder chapter became visible. In the existing research memo, this shows up as the origin myth for the site \u2014 not because it is flashy, but because it establishes the pace of the career that follows.",
+      "The public story begins with an early-start reputation: a technical path that separated from the ordinary cadence well before the founder chapter became visible. In the existing research memo, this shows up as the origin myth for the site — not because it is flashy, but because it establishes the pace of the career that follows.",
       "Rather than overclaiming details that are not yet fully sourced, the chronicle treats this period as formative acceleration: early entry into serious technical study, followed by deeper specialization and a cross-border academic arc. The right editorial move here is restraint. The page should preserve the feeling of velocity without pretending certainty where the public record is still thin."
     ],
     "proofPoints": [
@@ -46,7 +46,7 @@
     "dek": "Before Silicon Valley company building, there is a long research arc anchored in electrical and electronic engineering.",
     "narrative": [
       "What stands out in the public record is not a fast jump straight into entrepreneurship, but a serious academic foundation. Sean Xiang is publicly described as holding a Ph.D. in Electrical and Electronic Engineering from The Chinese University of Hong Kong, which gives the chronicle an important tonal shift: this is a builder shaped by technical depth, not a founder manufactured by branding alone.",
-      "That matters because Bloombase operates in data-at-rest security, encryption, platform trust, and infrastructure partnerships \u2014 domains where credibility compounds slowly. The academic chapter is therefore more than biography. It is the first clue to why the later company arc is so persistent across multiple computing waves."
+      "That matters because Bloombase operates in data-at-rest security, encryption, platform trust, and infrastructure partnerships — domains where credibility compounds slowly. The academic chapter is therefore more than biography. It is the first clue to why the later company arc is so persistent across multiple computing waves."
     ],
     "proofPoints": [
       "Ph.D. in Electrical and Electronic Engineering from The Chinese University of Hong Kong.",
@@ -54,7 +54,7 @@
       "Narrative function: explain later durability in security and infrastructure markets."
     ],
     "locationId": "hong-kong",
-    "mapCaption": "The camera tightens around Hong Kong once the record becomes firmer: this is the strongest publicly documented anchor for Sean Xiang\u2019s technical formation.",
+    "mapCaption": "The camera tightens around Hong Kong once the record becomes firmer: this is the strongest publicly documented anchor for Sean Xiang’s technical formation.",
     "mapCamera": {
       "center": [
         114.1694,
@@ -85,7 +85,7 @@
     "dek": "The Beckman Laser Institute chapter places Sean Xiang inside a research environment in Irvine before the company-building story takes center stage.",
     "narrative": [
       "The public profile also places Sean Xiang at the Beckman Laser Institute at the University of California, Irvine as a scientist. That detail matters because it adds an American research chapter between doctoral formation and the visible founder era.",
-      "In the structure of the site, Irvine should function as a bridge chapter: the geography changes, the network changes, and the narrative starts to move from pure research into the institutional context from which Silicon Valley company building becomes plausible. It is a transition chapter, not a detour \u2014 one of the places where the biography becomes easier to map and easier to believe."
+      "In the structure of the site, Irvine should function as a bridge chapter: the geography changes, the network changes, and the narrative starts to move from pure research into the institutional context from which Silicon Valley company building becomes plausible. It is a transition chapter, not a detour — one of the places where the biography becomes easier to map and easier to believe."
     ],
     "proofPoints": [
       "Scientist at The Beckman Laser Institute, University of California, Irvine.",
@@ -165,17 +165,17 @@
   {
     "id": "enterprise-validation",
     "phase": "Enterprise validation years",
-    "range": "2014\u20132020",
+    "range": "2014–2020",
     "title": "Validation accumulates through alliances, certifications, and interoperability",
     "dek": "The middle of the story is where Bloombase becomes legible as a trusted enterprise player rather than simply a founder-led company with a good narrative.",
     "narrative": [
-      "From 2014 through 2020, a series of concrete milestones makes the company easier to situate inside the enterprise security ecosystem. Public announcements show Bloombase joining VMware's Technology Alliance Partner Program, entering Hitachi Data Systems' alliance program, certifying with HP Enterprise Secure Key Manager, joining Thales' ASAP alliance, earning HPE cloud and ArcSight signals, securing IBM validation, launching for VMware Cloud on AWS, appearing in Azure Marketplace, and collaborating with nCipher and Futurex.",
+      "From 2014 through 2020, a series of concrete milestones makes the company easier to situate inside the enterprise security ecosystem. Public announcements show Bloombase moving from Dell certification and Hitachi alliance proof into HP key-management interoperability, Thales ASAP participation, Ultra Electronics AEP HSM trust, HPE cloud and ArcSight signals, IBM validation, ATTO storage-networking interoperability, VMware Cloud on AWS, Azure Marketplace, and later collaborations with nCipher and Futurex.",
       "The editorial point is not to turn these into a noisy logo dump. It is to show an accumulation pattern: the company repeatedly appears where interoperability, trust, and security assurance matter. In a founder chronicle, that pattern is stronger than any one announcement because it shows persistence across years and across infrastructure regimes."
     ],
     "proofPoints": [
-      "2013: OpenStack, EMC, and VMware ecosystem milestones start the public validation trail before the 2014?2020 run.",
-      "2014?2015: Dell, Hitachi, HP ESKM, Thales ASAP, HPE Helion Ready / ArcSight.",
-      "2017?2020: IBM validation, VMware Cloud on AWS, Azure Marketplace, nCipher, Futurex."
+      "2013-2014: OpenStack, EMC, VMware, Dell, and Hitachi make the public validation trail visible early.",
+      "2015-2017: HP ESKM, Thales ASAP, Ultra Electronics AEP, HPE, IBM, and ATTO show the trust layer deepening across key custody and storage infrastructure.",
+      "2018-2020: VMware Cloud on AWS, Azure Marketplace, nCipher, and Futurex keep the company legible as platforms and deployment surfaces shift."
     ],
     "locationId": "redwood-city",
     "mapCaption": "The location stays anchored in Silicon Valley while the map emphasis shifts from movement to density: this chapter is about staying put long enough to accumulate interoperability proof.",
@@ -228,7 +228,7 @@
       "Narrative function: show institutional and market movement, not just travel."
     ],
     "locationId": "vancouver",
-    "mapCaption": "The Vancouver move is a strategic widening, not a decorative international pin \u2014 a source-backed expansion story about talent, cryptography, and ecosystem positioning.",
+    "mapCaption": "The Vancouver move is a strategic widening, not a decorative international pin — a source-backed expansion story about talent, cryptography, and ecosystem positioning.",
     "mapCamera": {
       "center": [
         -123.1207,
@@ -254,8 +254,8 @@
   {
     "id": "ai-era",
     "phase": "AI-era repositioning",
-    "range": "2023\u20132025",
-    "title": "The latest chapter is not nostalgia \u2014 it is AI infrastructure",
+    "range": "2023–2025",
+    "title": "The latest chapter is not nostalgia — it is AI infrastructure",
     "dek": "The recent Bloombase narrative reframes decades of security work for accelerated computing, data pipelines, and AI-era protection.",
     "narrative": [
       "The strongest reason this chronicle matters now is that it does not end in a legacy-enterprise graveyard. In 2023, Bloombase publicly framed its work around rebuilding data-at-rest security with NVIDIA DPUs and GPUs. In 2025, the company announced a technology alliance with Utimaco focused on data security solutions for the AI era.",

@@ -1,4 +1,4 @@
-﻿{
+{
   "title": {
     "text": {
       "headline": "Sean Xiang - Founder Chronicle",
@@ -351,7 +351,38 @@
       ],
       "id": "utimaco-alliance",
       "chapterId": "ai-era"
+    },
+    {
+      "start_date": {
+        "year": "2016",
+        "month": "6",
+        "day": "13"
+      },
+      "text": {
+        "headline": "Ultra Electronics AEP Keyper HSM interoperability",
+        "text": "Bloombase expands the trust-layer story with a direct HSM interoperability release focused on hardened key storage and large-scale enterprise security."
+      },
+      "sourceIds": [
+        "ultra-2016"
+      ],
+      "id": "ultra-aep-keyper",
+      "chapterId": "enterprise-validation"
+    },
+    {
+      "start_date": {
+        "year": "2017",
+        "month": "7",
+        "day": "17"
+      },
+      "text": {
+        "headline": "ATTO interoperability certification",
+        "text": "Bloombase certifies StoreSafe with ATTO storage-networking hardware, extending the validation arc into SAN, NAS, and high-speed connectivity infrastructure."
+      },
+      "sourceIds": [
+        "atto-2017"
+      ],
+      "id": "atto-certification",
+      "chapterId": "enterprise-validation"
     }
   ]
 }
-
