@@ -39,9 +39,13 @@
 - new evidence-exhibit layer added between narrative chapters and the archive, grouping the strongest source-backed artifacts into editorial desk-style exhibit cards with chapter/archive jumps and provenance links
 - artifact visual system upgraded again with source-backed media decks, so strong chapters can carry richer article-snippet / conference-visual / future-scan slots without resorting to toy placeholder imagery
 - source archive and validation arc expanded with additional direct Bloombase primary URLs for 2016 (Ultra Electronics AEP / Keyper HSM interoperability) and 2017 (ATTO interoperability), plus corresponding timeline and exhibit coverage
+- explicit reader-mode system added so the chronicle now supports a real skim/deep split instead of merely implying dual reading modes:
+  - skim mode keeps thesis, chapter arc, map, validation, and present-direction surfaces visible
+  - deep mode opens the exhibit desk, reference timeline, source explorer, roadmap, and public-record layers
+  - chapter body copy now trims to the lead paragraph in skim mode while preserving full narrative in deep mode
 
 ## Next implementation steps
 1. Strengthen the source archive further by capturing more direct primary URLs for early academic details, especially anything tighter than the current profile-level CUHK / Beckman trail.
 2. Populate the new media-deck slots with actual preserved captures or conference visuals for the AI-era chapter once durable public assets are collected.
-3. Keep tightening direct primary sourcing for pre-founder academic detail so the earliest chapter can move from restrained framing into firmer chronology.
+3. Use the new skim/deep reader-mode split to decide whether the next premium layer should be a compact chapter-summary rail, a denser exhibit treatment, or a more explicit entry point into the deep evidence desk.
 4. Consider migrating the static prototype into Astro once the content model stabilizes.

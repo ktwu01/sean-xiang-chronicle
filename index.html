@@ -116,6 +116,71 @@
     .stat strong { display: block; font-family: Georgia, serif; font-size: 28px; margin-bottom: 4px; }
     .stat span { font-size: 13px; line-height: 1.5; color: var(--muted); }
 
+    .reader-modes {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) auto;
+      gap: 18px;
+      align-items: center;
+      padding: 18px 22px;
+      margin: 0 0 22px;
+    }
+    .reader-mode-copy {
+      display: grid;
+      gap: 8px;
+    }
+    .reader-mode-copy p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+      max-width: 68ch;
+    }
+    .reader-mode-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 999px;
+      background: rgba(25,50,79,.05);
+      border: 1px solid rgba(25,50,79,.08);
+    }
+    .reader-mode-button {
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      padding: 11px 14px;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      transition: .18s ease;
+    }
+    .reader-mode-button.active {
+      background: var(--accent);
+      color: #f6f1e7;
+      box-shadow: 0 10px 18px rgba(25,50,79,.16);
+    }
+    .reader-mode-status {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+    .reader-mode-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border: 1px solid rgba(25,50,79,.08);
+      background: rgba(25,50,79,.04);
+      color: var(--accent);
+    }
+
     .phase-rail {
       position: sticky; top: 0; z-index: 20; margin: 0 0 28px; padding: 14px; border-radius: 22px; background: rgba(247,243,236,.88);
       backdrop-filter: blur(18px); border: 1px solid rgba(31,39,50,.08); box-shadow: 0 14px 28px rgba(31,39,50,.08);
@@ -1943,10 +2008,21 @@
       background: rgba(25,50,79,.06);
     }
 
+    body[data-reading-mode="skim"] .detail-paragraph,
+    body[data-reading-mode="skim"] .is-deep-section {
+      display: none;
+    }
+    body[data-reading-mode="skim"] .chapter {
+      padding-bottom: 22px;
+    }
+    body[data-reading-mode="skim"] .artifact-stack {
+      margin-top: 14px;
+    }
+
     .footer-note { margin-top: 18px; color: var(--soft); font-size: 13px; line-height: 1.7; }
 
     @media (max-width: 1080px) {
-      .hero, .overview, .main-grid, .archive-header, .present-grid, .evidence-audit, .source-explorer-header, .exhibit-grid, .ledger-grid { grid-template-columns: 1fr; }
+      .hero, .overview, .main-grid, .archive-header, .present-grid, .evidence-audit, .source-explorer-header, .exhibit-grid, .ledger-grid, .reader-modes { grid-template-columns: 1fr; }
       .sticky-stack { position: static; }
       .phase-rail ol { grid-template-columns: repeat(3, minmax(0,1fr)); }
       .archive-controls { justify-items: start; }
@@ -2007,6 +2083,18 @@
         </div>
         <div class="thesis-grid" id="heroStats"></div>
       </aside>
+    </section>
+
+    <section class="card reader-modes" aria-label="Reader mode controls">
+      <div class="reader-mode-copy">
+        <div class="section-kicker">Reader modes</div>
+        <p id="readerModeSummary">Skim mode keeps the founder thesis, chapter arc, map, and validation surface in view. Deep mode opens the full exhibit, archive, and source desk for readers who want to audit the record.</p>
+        <div class="reader-mode-status" id="readerModeStatus"></div>
+      </div>
+      <div class="reader-mode-controls" role="tablist" aria-label="Choose reading mode">
+        <button class="reader-mode-button active" id="skimModeButton" type="button" data-mode="skim" role="tab" aria-selected="true">Skim mode</button>
+        <button class="reader-mode-button" id="deepModeButton" type="button" data-mode="deep" role="tab" aria-selected="false">Deep mode</button>
+      </div>
     </section>
 
     <nav class="phase-rail card" aria-label="Chapter navigation">
@@ -2074,7 +2162,7 @@
       </aside>
     </section>
 
-    <section class="exhibits-wrap">
+    <section class="exhibits-wrap is-deep-section">
       <article class="card exhibits-panel">
         <div class="section-label">Evidence exhibit</div>
         <h2>Key source-backed exhibits, grouped like an editorial desk</h2>
@@ -2085,7 +2173,7 @@
       </article>
     </section>
 
-    <section class="archive-wrap">
+    <section class="archive-wrap is-deep-section">
       <article class="card archive-panel">
         <div class="section-label">Reference timeline</div>
         <div class="archive-header">
@@ -2118,7 +2206,7 @@
       </article>
     </section>
 
-    <section class="sources-wrap" id="sources">
+    <section class="sources-wrap is-deep-section" id="sources">
       <article class="card sources-panel">
         <div class="section-label">Archive / sources</div>
         <h2>The site earns trust by showing its receipts</h2>
@@ -2239,6 +2327,39 @@
         stat.append(make('span', '', text));
         root.append(stat);
       });
+    }
+
+    function initializeReaderModes() {
+      const summary = document.getElementById('readerModeSummary');
+      const status = document.getElementById('readerModeStatus');
+      const buttons = Array.from(document.querySelectorAll('.reader-mode-button'));
+      const modeCopy = {
+        skim: 'Skim mode keeps the founder thesis, chapter arc, map, and validation surface in view. Deep mode opens the full exhibit, archive, and source desk for readers who want to audit the record.',
+        deep: 'Deep mode turns the page into a source-backed editorial desk: exhibits, archive chronology, roadmap, and source explorer all stay in play alongside the chapter narrative.'
+      };
+      const modePills = {
+        skim: ['Fast read', 'Narrative chapters', 'Map + validation'],
+        deep: ['Full exhibits', 'Reference timeline', 'Source archive']
+      };
+
+      function setMode(mode) {
+        document.body.dataset.readingMode = mode;
+        summary.textContent = modeCopy[mode] || modeCopy.skim;
+        status.innerHTML = '';
+        (modePills[mode] || []).forEach((label) => status.append(make('span', 'reader-mode-pill', label)));
+        buttons.forEach((button) => {
+          const active = button.dataset.mode === mode;
+          button.classList.toggle('active', active);
+          button.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+      }
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => setMode(button.dataset.mode || 'skim'));
+      });
+
+      window.setReadingMode = setMode;
+      setMode('skim');
     }
 
     function artifactPrimaryLine(sourceOrSources) {
@@ -2452,7 +2573,10 @@
         article.append(make('h3', '', chapter.title));
         article.append(make('div', 'dek', chapter.dek));
 
-        chapter.narrative.forEach((paragraph) => article.append(make('p', '', paragraph)));
+        chapter.narrative.forEach((paragraph, index) => {
+          const paragraphEl = make('p', index > 0 ? 'detail-paragraph' : '', paragraph);
+          article.append(paragraphEl);
+        });
 
         const proofList = make('ul', 'proof-list');
         chapter.proofPoints.forEach((point) => {
@@ -2980,6 +3104,7 @@
         syncFilterButtons();
         draw();
         if (event.detail?.scrollSources) {
+          window.setReadingMode?.('deep');
           document.getElementById('sourceRoadmapWrap')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
@@ -3067,6 +3192,7 @@
         focusedChapterId = chapterId;
         draw();
         if (event.detail?.scrollSources) {
+          window.setReadingMode?.('deep');
           document.getElementById('publicRecordLedger')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
@@ -3439,6 +3565,7 @@
         syncFilterButtons();
         draw();
         if (event.detail?.scrollSources) {
+          window.setReadingMode?.('deep');
           document.getElementById('sources')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
@@ -3650,6 +3777,7 @@
           applyArchiveFilters();
         }
         if (options.scroll !== false) {
+          window.setReadingMode?.('deep');
           document.getElementById('archiveTimeline')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
         if (eventId) {
@@ -4065,6 +4193,7 @@
       });
       renderPhaseRail(chapters);
       renderHeroStats(chapters, locations, timeline, sources);
+      initializeReaderModes();
       const archiveApi = renderArchive(timeline.events, sourcesById, chaptersById);
       renderChapterLedger(chapters, sourcesById, eventsByChapterId, artifactsByChapterId, sourceRoadmap, archiveApi.openArchiveScope);
       renderChapters(chapters, sourcesById, artifactsByChapterId, taxonomyById, eventsByChapterId, archiveApi.openArchiveScope);
