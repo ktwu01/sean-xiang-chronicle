@@ -550,6 +550,110 @@
     }
     .dek { color: var(--accent); font-size: 17px; line-height: 1.65; margin-bottom: 18px; }
     .chapter p { color: var(--muted); line-height: 1.82; margin: 0 0 14px; }
+    .chapter-deep-dossier {
+      display: grid;
+      gap: 18px;
+      margin: 0 0 20px;
+      padding: 20px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(25,50,79,.08), rgba(25,50,79,.04));
+      border: 1px solid rgba(25,50,79,.09);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.44);
+    }
+    .chapter-deep-dossier-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(250px, .85fr);
+      gap: 16px;
+      align-items: start;
+    }
+    .chapter-deep-dossier-head h4 {
+      margin: 0 0 8px;
+      font-family: Georgia, serif;
+      font-size: 24px;
+      line-height: 1.25;
+      letter-spacing: -.02em;
+      color: var(--ink);
+    }
+    .chapter-deep-dossier-head p,
+    .chapter-deep-dossier-frame p,
+    .chapter-deep-dossier-upgrade p,
+    .chapter-deep-dossier-proof p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+    .chapter-deep-dossier-frame-grid,
+    .chapter-deep-dossier-proof-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .chapter-deep-dossier-frame,
+    .chapter-deep-dossier-proof,
+    .chapter-deep-dossier-upgrade {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.68);
+      border: 1px solid rgba(25,50,79,.08);
+    }
+    .chapter-deep-dossier-frame strong,
+    .chapter-deep-dossier-proof strong,
+    .chapter-deep-dossier-upgrade strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+    }
+    .chapter-deep-dossier-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .chapter-deep-dossier-metric {
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(25,50,79,.08);
+    }
+    .chapter-deep-dossier-metric strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+    .chapter-deep-dossier-metric span {
+      display: block;
+      color: var(--ink);
+      line-height: 1.58;
+      font-size: 13px;
+    }
+    .chapter-deep-dossier-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .chapter-deep-dossier-action {
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      text-decoration: none;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(25,50,79,.06);
+      border: 1px solid rgba(25,50,79,.08);
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .chapter-deep-dossier-action.primary {
+      background: var(--accent);
+      color: #f6f1e7;
+    }
     .proof-list { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
     .proof-list li {
       padding: 12px 14px; border-radius: 16px; background: rgba(25,50,79,.05); border: 1px solid rgba(25,50,79,.08); color: var(--ink); line-height: 1.6;
@@ -2383,7 +2487,7 @@
       .phase-rail ol { grid-template-columns: repeat(3, minmax(0,1fr)); }
       .archive-controls { justify-items: start; }
       .archive-filter-group { justify-content: flex-start; }
-      .audit-row, .roadmap-grid, .source-dossier-meta, .chapter-compass-grid, .chapter-compass-metrics, .deep-briefs-grid, .exhibit-summary-grid, .exhibit-sequence-grid { grid-template-columns: 1fr; }
+      .audit-row, .roadmap-grid, .source-dossier-meta, .chapter-compass-grid, .chapter-compass-metrics, .deep-briefs-grid, .exhibit-summary-grid, .exhibit-sequence-grid, .chapter-deep-dossier-head, .chapter-deep-dossier-frame-grid, .chapter-deep-dossier-proof-grid, .chapter-deep-dossier-metrics { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 700px) {
@@ -3118,6 +3222,132 @@
       return strip;
     }
 
+    function buildChapterNarrativePackets(chapters, sourcesById, eventsByChapterId, artifactsByChapterId, deepBriefs = [], exhibits = [], roadmap = []) {
+      const briefByChapter = new Map((deepBriefs || []).map((brief) => [brief.chapterId, brief]));
+      const exhibitByChapter = new Map((exhibits || []).map((exhibit) => [exhibit.chapterId, exhibit]));
+      const roadmapByChapter = new Map();
+      (roadmap || []).forEach((entry) => {
+        if (!roadmapByChapter.has(entry.chapterId)) roadmapByChapter.set(entry.chapterId, []);
+        roadmapByChapter.get(entry.chapterId).push(entry);
+      });
+
+      const auditRows = buildChapterAudit(chapters, sourcesById, eventsByChapterId, artifactsByChapterId);
+      return new Map(auditRows.map((entry) => {
+        const chapter = entry.chapter;
+        const brief = briefByChapter.get(chapter.id) || null;
+        const exhibit = exhibitByChapter.get(chapter.id) || null;
+        const roadmapEntries = roadmapByChapter.get(chapter.id) || [];
+        const chapterSourceIds = new Set([...(chapter.sources || []), ...((eventsByChapterId.get(chapter.id) || []).flatMap((event) => event.sourceIds || []))]);
+        const orderedSources = Array.from(chapterSourceIds)
+          .map((sourceId) => sourcesById.get(sourceId))
+          .filter(Boolean)
+          .sort((a, b) => {
+            const verificationRank = { direct: 0, bridge: 1, working: 2 };
+            const publisherRank = { 'first-party': 0, 'third-party': 1, internal: 2 };
+            return (verificationRank[a.verificationState] ?? 3) - (verificationRank[b.verificationState] ?? 3)
+              || (publisherRank[a.publisherType] ?? 3) - (publisherRank[b.publisherType] ?? 3)
+              || String(a.year || '').localeCompare(String(b.year || ''));
+          });
+
+        return [chapter.id, {
+          chapter,
+          brief,
+          exhibit,
+          roadmapEntries,
+          orderedSources,
+          metrics: entry
+        }];
+      }));
+    }
+
+    function renderChapterDeepDossier(packet, openArchiveScope) {
+      const { chapter, brief, exhibit, roadmapEntries, orderedSources, metrics } = packet;
+      const dossier = make('section', 'chapter-deep-dossier is-deep-section');
+      dossier.dataset.chapter = chapter.id;
+
+      const head = make('div', 'chapter-deep-dossier-head');
+      const copy = make('div');
+      copy.append(make('div', 'section-label', brief?.eyebrow || 'Deep-mode chapter dossier'));
+      copy.append(make('h4', '', brief?.title || chapter.title));
+      copy.append(make('p', '', brief?.summary || chapter.dek));
+      head.append(copy);
+
+      const upgrade = make('div', 'chapter-deep-dossier-upgrade');
+      upgrade.append(make('strong', '', brief?.nextUpgradeLabel || 'Next upgrade'));
+      upgrade.append(make('p', '', brief?.nextUpgrade || roadmapEntries[0]?.title || chapter.evidenceProfile?.artifact || 'No chapter-specific upgrade target queued yet.'));
+      head.append(upgrade);
+      dossier.append(head);
+
+      const frames = make('div', 'chapter-deep-dossier-frame-grid');
+      [
+        ['How to read this chapter', brief?.whyDeep || chapter.evidenceProfile?.stance || chapter.dek],
+        ['Editorial evidence move', brief?.evidenceMove || exhibit?.curatorNote || 'Read the chapter through its strongest available evidence layer, then drop into the archive for chronology.']
+      ].forEach(([label, text]) => {
+        const card = make('div', 'chapter-deep-dossier-frame');
+        card.append(make('strong', '', label));
+        card.append(make('p', '', text));
+        frames.append(card);
+      });
+      dossier.append(frames);
+
+      const metricsGrid = make('div', 'chapter-deep-dossier-metrics');
+      [
+        ['Archive density', `${metrics.eventCount} timeline event${metrics.eventCount === 1 ? '' : 's'} · ${metrics.artifactCount} artifact${metrics.artifactCount === 1 ? '' : 's'}`],
+        ['Evidence posture', `${metrics.primaryCount} direct / ${metrics.contextCount} bridge / ${metrics.workingCount} working`],
+        ['Exhibit status', exhibit ? exhibit.title : 'No dedicated exhibit yet']
+      ].forEach(([label, text]) => {
+        const stat = make('div', 'chapter-deep-dossier-metric');
+        stat.append(make('strong', '', label));
+        stat.append(make('span', '', text));
+        metricsGrid.append(stat);
+      });
+      dossier.append(metricsGrid);
+
+      const proofGrid = make('div', 'chapter-deep-dossier-proof-grid');
+      const sourceCard = make('div', 'chapter-deep-dossier-proof');
+      sourceCard.append(make('strong', '', 'Strongest current anchors'));
+      const sourceText = orderedSources.slice(0, 3).map((source) => `${source.label}${source.year ? ` (${source.year})` : ''}`).join(' · ');
+      sourceCard.append(make('p', '', sourceText || 'Working synthesis still leads this chapter.'));
+      proofGrid.append(sourceCard);
+
+      const bridgeCard = make('div', 'chapter-deep-dossier-proof');
+      bridgeCard.append(make('strong', '', 'Best next desk move'));
+      bridgeCard.append(make('p', '', roadmapEntries[0]?.desiredEvidence || exhibit?.summary || 'Use the chapter archive cluster and source desk before adding new visual weight.'));
+      proofGrid.append(bridgeCard);
+      dossier.append(proofGrid);
+
+      const actions = make('div', 'chapter-deep-dossier-actions');
+      const readEvidence = make('button', 'chapter-deep-dossier-action primary', 'Open chapter evidence');
+      readEvidence.type = 'button';
+      readEvidence.addEventListener('click', () => {
+        window.setReadingMode?.('deep');
+        openArchiveScope?.(chapter.id);
+      });
+      actions.append(readEvidence);
+
+      if (exhibit) {
+        const exhibitButton = make('button', 'chapter-deep-dossier-action', 'Open matching exhibit');
+        exhibitButton.type = 'button';
+        exhibitButton.addEventListener('click', () => {
+          window.setReadingMode?.('deep');
+          document.getElementById(`exhibit-${exhibit.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+        actions.append(exhibitButton);
+      }
+
+      const roadmapButton = make('button', 'chapter-deep-dossier-action', 'Open source roadmap');
+      roadmapButton.type = 'button';
+      roadmapButton.addEventListener('click', () => {
+        window.setReadingMode?.('deep');
+        announceChapterFocus(chapter.id, { scrollSources: true });
+        document.getElementById('sourceRoadmapWrap')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      actions.append(roadmapButton);
+      dossier.append(actions);
+
+      return dossier;
+    }
+
     function renderChapterLedger(chapters, sourcesById, eventsByChapterId, artifactsByChapterId, roadmap, openArchiveScope, deepBriefs, exhibits, publicRecordLedger) {
       const root = document.getElementById('chapterLedger');
       if (!root) return;
@@ -3252,7 +3482,7 @@
       });
     }
 
-    function renderChapters(chapters, sourcesById, artifactsByChapterId, taxonomyById, eventsByChapterId, openArchiveScope) {
+    function renderChapters(chapters, sourcesById, artifactsByChapterId, taxonomyById, eventsByChapterId, openArchiveScope, chapterPackets) {
       const root = document.getElementById('chapters');
       chapters.forEach((chapter) => {
         const article = make('article', 'card chapter');
@@ -3267,6 +3497,11 @@
 
         article.append(make('h3', '', chapter.title));
         article.append(make('div', 'dek', chapter.dek));
+
+        const chapterPacket = chapterPackets?.get(chapter.id);
+        if (chapterPacket) {
+          article.append(renderChapterDeepDossier(chapterPacket, openArchiveScope));
+        }
 
         chapter.narrative.forEach((paragraph, index) => {
           const paragraphEl = make('p', index > 0 ? 'detail-paragraph' : '', paragraph);
@@ -4976,6 +5211,7 @@
         if (!artifactsByChapterId.has(artifact.chapterId)) artifactsByChapterId.set(artifact.chapterId, []);
         artifactsByChapterId.get(artifact.chapterId).push(artifact);
       });
+      const chapterPackets = buildChapterNarrativePackets(chapters, sourcesById, eventsByChapterId, artifactsByChapterId, deepBriefs, exhibits, sourceRoadmap);
       renderPhaseRail(chapters);
       renderHeroStats(chapters, locations, timeline, sources);
       initializeReaderModes();
@@ -4983,7 +5219,7 @@
       renderChapterCompass(chapters, sourcesById, eventsByChapterId, artifactsByChapterId, sourceRoadmap, archiveApi.openArchiveScope);
       renderDeepBriefs(deepBriefs, chaptersById, sourcesById, sourceRoadmap);
       renderChapterLedger(chapters, sourcesById, eventsByChapterId, artifactsByChapterId, sourceRoadmap, archiveApi.openArchiveScope, deepBriefs, exhibits, publicRecordLedger);
-      renderChapters(chapters, sourcesById, artifactsByChapterId, taxonomyById, eventsByChapterId, archiveApi.openArchiveScope);
+      renderChapters(chapters, sourcesById, artifactsByChapterId, taxonomyById, eventsByChapterId, archiveApi.openArchiveScope, chapterPackets);
       renderMapNav(chapters, locationById, eventsByChapterId, sourcesById);
       const setActiveLocation = initializeMap(locations, chapters);
       renderValidation(validationGroups, sourcesById);
