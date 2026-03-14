@@ -2156,6 +2156,122 @@
       color: var(--muted);
       line-height: 1.78;
     }
+    .exhibit-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0 16px;
+    }
+    .exhibit-summary-stat {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(247,243,236,.82);
+      border: 1px solid rgba(25,50,79,.08);
+    }
+    .exhibit-summary-stat strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+    .exhibit-summary-stat span {
+      display: block;
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .exhibit-reading-frame {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(260px, .95fr);
+      gap: 14px;
+      margin: 0 0 18px;
+    }
+    .exhibit-frame-card {
+      padding: 16px 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(25,50,79,.08);
+      background: rgba(255,255,255,.66);
+    }
+    .exhibit-frame-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+    }
+    .exhibit-frame-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+    .exhibit-sequence {
+      display: grid;
+      gap: 12px;
+      margin: 0 0 18px;
+    }
+    .exhibit-sequence-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: baseline;
+    }
+    .exhibit-sequence-header strong {
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+    }
+    .exhibit-sequence-header span {
+      color: var(--soft);
+      font-size: 13px;
+    }
+    .exhibit-sequence-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .exhibit-sequence-card {
+      display: grid;
+      gap: 8px;
+      padding: 16px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(247,243,236,.92), rgba(255,255,255,.72));
+      border: 1px solid rgba(25,50,79,.08);
+    }
+    .exhibit-sequence-card strong {
+      display: block;
+      font-family: Georgia, serif;
+      font-size: 18px;
+      line-height: 1.35;
+      color: var(--ink);
+    }
+    .exhibit-sequence-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.64;
+      font-size: 14px;
+    }
+    .exhibit-sequence-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .exhibit-sequence-meta span {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(25,50,79,.05);
+      border: 1px solid rgba(25,50,79,.08);
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
     .exhibit-lens {
       margin: 0;
       padding-left: 18px;
@@ -2233,12 +2349,12 @@
     .footer-note { margin-top: 18px; color: var(--soft); font-size: 13px; line-height: 1.7; }
 
     @media (max-width: 1080px) {
-      .hero, .overview, .main-grid, .archive-header, .present-grid, .evidence-audit, .source-explorer-header, .exhibit-grid, .ledger-grid, .reader-modes, .chapter-compass-header { grid-template-columns: 1fr; }
+      .hero, .overview, .main-grid, .archive-header, .present-grid, .evidence-audit, .source-explorer-header, .exhibit-grid, .ledger-grid, .reader-modes, .chapter-compass-header, .exhibit-reading-frame { grid-template-columns: 1fr; }
       .sticky-stack { position: static; }
       .phase-rail ol { grid-template-columns: repeat(3, minmax(0,1fr)); }
       .archive-controls { justify-items: start; }
       .archive-filter-group { justify-content: flex-start; }
-      .audit-row, .roadmap-grid, .source-dossier-meta, .chapter-compass-grid, .chapter-compass-metrics, .deep-briefs-grid { grid-template-columns: 1fr; }
+      .audit-row, .roadmap-grid, .source-dossier-meta, .chapter-compass-grid, .chapter-compass-metrics, .deep-briefs-grid, .exhibit-summary-grid, .exhibit-sequence-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 700px) {
@@ -2809,6 +2925,59 @@
       return ids.map((sourceId) => sourcesById.get(sourceId)).filter(Boolean);
     }
 
+    function sourceYearValue(source) {
+      const raw = String(source?.year || '').match(/\d{4}/)?.[0];
+      return raw ? Number(raw) : null;
+    }
+
+    function buildExhibitInsights(artifacts, sourcesById, taxonomyById) {
+      const artifactEntries = artifacts.map((artifact) => {
+        const sources = resolveArtifactSources(artifact, sourcesById);
+        const taxonomy = taxonomyById.get(artifact.type);
+        const years = sources.map(sourceYearValue).filter((value) => Number.isFinite(value));
+        const primarySources = sources.filter((source) => source.verificationState === 'direct');
+        return {
+          artifact,
+          sources,
+          taxonomy,
+          year: years.length ? Math.min(...years) : null,
+          primaryCount: primarySources.length,
+          publisherTypes: [...new Set(sources.map((source) => source.publisherType).filter(Boolean))]
+        };
+      }).sort((a, b) => (a.year ?? 9999) - (b.year ?? 9999) || a.artifact.title.localeCompare(b.artifact.title));
+
+      const allSources = artifactEntries.flatMap((entry) => entry.sources);
+      const years = artifactEntries.map((entry) => entry.year).filter((value) => Number.isFinite(value));
+      const directCount = allSources.filter((source) => source.verificationState === 'direct').length;
+      const contextCount = allSources.filter((source) => source.verificationState === 'bridge').length;
+      const workingCount = allSources.filter((source) => source.verificationState === 'working').length;
+      const surfaces = [...new Set(artifactEntries.map((entry) => entry.taxonomy?.label).filter(Boolean))];
+      const publisherLabels = [...new Set(allSources.map((source) => source.publisherLabel || source.publisherType).filter(Boolean))];
+      const timeSpan = years.length ? (years[0] === years[years.length - 1] ? String(years[0]) : `${years[0]}-${years[years.length - 1]}`) : 'Undated exhibit';
+
+      let evidenceMix = `${directCount} direct source${directCount === 1 ? '' : 's'}`;
+      if (contextCount) evidenceMix += ` · ${contextCount} bridge source${contextCount === 1 ? '' : 's'}`;
+      if (!directCount && workingCount) evidenceMix += ` · ${workingCount} working source${workingCount === 1 ? '' : 's'}`;
+
+      const progression = artifactEntries.length > 1
+        ? `${artifactEntries[0].artifact.title} opens the sequence, then ${artifactEntries[artifactEntries.length - 1].artifact.title} shows where the chapter thickens or reopens.`
+        : `${artifactEntries[0]?.artifact.title || 'This artifact'} carries the chapter largely on its own, so the reading experience should stay restrained and source-led.`;
+
+      const readingFrame = publisherLabels.length
+        ? `Read this exhibit as ${surfaces.length > 1 ? 'a comparative stack' : 'a focused proof set'} built from ${publisherLabels.join(' + ')} rather than as a loose gallery of documents.`
+        : 'Read this exhibit as a source-led evidence cluster rather than a loose gallery of documents.';
+
+      return {
+        artifactEntries,
+        timeSpan,
+        directCount,
+        surfaces,
+        evidenceMix,
+        readingFrame,
+        progression
+      };
+    }
+
     function renderArtifactVisual(artifact, sources) {
       const visual = make('div', 'artifact-visual');
       visual.dataset.mode = artifact.displayMode || 'document';
@@ -3154,6 +3323,8 @@
       const root = document.getElementById('exhibitGrid');
       exhibits.forEach((exhibit) => {
         const chapter = chaptersById.get(exhibit.chapterId);
+        const exhibitArtifacts = (exhibit.artifactIds || []).map((artifactId) => artifactsById.get(artifactId)).filter(Boolean);
+        const insights = buildExhibitInsights(exhibitArtifacts, sourcesById, taxonomyById);
         const card = make('section', 'exhibit-card');
         card.id = `exhibit-${exhibit.id}`;
         card.append(make('div', 'artifact-eyebrow', exhibit.eyebrow));
@@ -3164,12 +3335,60 @@
           card.append(note);
         }
 
+        const summaryGrid = make('div', 'exhibit-summary-grid');
+        [
+          ['Coverage span', insights.timeSpan],
+          ['Evidence mix', insights.evidenceMix],
+          ['Trust surfaces', insights.surfaces.length ? insights.surfaces.join(' · ') : 'Single source posture'],
+          ['Artifact load', `${insights.artifactEntries.length} artifact${insights.artifactEntries.length === 1 ? '' : 's'}`]
+        ].forEach(([label, value]) => {
+          const stat = make('div', 'exhibit-summary-stat');
+          stat.append(make('strong', '', label));
+          stat.append(make('span', '', value));
+          summaryGrid.append(stat);
+        });
+        card.append(summaryGrid);
+
+        const readingFrame = make('div', 'exhibit-reading-frame');
+        const frameA = make('div', 'exhibit-frame-card');
+        frameA.append(make('strong', '', 'How to read this exhibit'));
+        frameA.append(make('p', '', insights.readingFrame));
+        readingFrame.append(frameA);
+
+        const frameB = make('div', 'exhibit-frame-card');
+        frameB.append(make('strong', '', 'Comparative progression'));
+        frameB.append(make('p', '', insights.progression));
+        readingFrame.append(frameB);
+        card.append(readingFrame);
+
+        if (insights.artifactEntries.length) {
+          const sequence = make('section', 'exhibit-sequence');
+          const sequenceHeader = make('div', 'exhibit-sequence-header');
+          sequenceHeader.append(make('strong', '', 'Comparative sequence'));
+          sequenceHeader.append(make('span', '', 'The desk now shows how the proof accumulates, not just which documents exist.'));
+          sequence.append(sequenceHeader);
+
+          const sequenceGrid = make('div', 'exhibit-sequence-grid');
+          insights.artifactEntries.forEach((entry) => {
+            const item = make('article', 'exhibit-sequence-card');
+            const meta = make('div', 'exhibit-sequence-meta');
+            meta.append(make('span', '', entry.year ? String(entry.year) : 'Undated'));
+            if (entry.taxonomy?.label) meta.append(make('span', '', entry.taxonomy.label));
+            if (entry.primaryCount) meta.append(make('span', '', `${entry.primaryCount} direct`));
+            item.append(meta);
+            item.append(make('strong', '', entry.artifact.title));
+            item.append(make('p', '', entry.artifact.excerpt || entry.artifact.caption || 'Source-backed artifact in the exhibit sequence.'));
+            sequenceGrid.append(item);
+          });
+          sequence.append(sequenceGrid);
+          card.append(sequence);
+        }
+
         const artifactStack = make('div', 'exhibit-artifacts');
-        (exhibit.artifactIds || []).forEach((artifactId) => {
-          const artifact = artifactsById.get(artifactId);
-          if (!artifact) return;
-          const artifactSources = resolveArtifactSources(artifact, sourcesById);
-          const taxonomy = taxonomyById.get(artifact.type);
+        insights.artifactEntries.forEach((entry) => {
+          const artifact = entry.artifact;
+          const artifactSources = entry.sources;
+          const taxonomy = entry.taxonomy;
           const artifactCard = make('article', 'exhibit-artifact');
           const topline = make('div', 'exhibit-artifact-topline');
           if (taxonomy) {
