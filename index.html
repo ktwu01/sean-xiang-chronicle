@@ -334,6 +334,83 @@
       color: #f6f1e7;
     }
 
+    .deep-briefs-wrap { margin: 0 0 34px; }
+    .deep-briefs-panel { padding: 28px; }
+    .deep-briefs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .deep-brief-card {
+      display: grid;
+      gap: 16px;
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(25,50,79,.08);
+      background: rgba(255,255,255,.62);
+    }
+    .deep-brief-card h3 {
+      margin: 0;
+      font-family: Georgia, serif;
+      font-size: 29px;
+      line-height: 1.18;
+      letter-spacing: -.025em;
+    }
+    .deep-brief-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.74;
+    }
+    .deep-brief-topline,
+    .deep-brief-meta,
+    .deep-brief-actions,
+    .deep-brief-sources {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .deep-brief-focus {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(25,50,79,.05);
+      border: 1px solid rgba(25,50,79,.08);
+    }
+    .deep-brief-focus strong,
+    .deep-brief-upgrade strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+    }
+    .deep-brief-upgrade {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(25,50,79,.08), rgba(45,95,115,.08));
+      border: 1px solid rgba(25,50,79,.08);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+    .deep-brief-action {
+      border: 1px solid rgba(25,50,79,.1);
+      background: rgba(25,50,79,.04);
+      color: var(--accent);
+      cursor: pointer;
+      padding: 10px 12px;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .deep-brief-action.primary {
+      background: var(--accent);
+      color: #f6f1e7;
+      border-color: rgba(25,50,79,.2);
+    }
+
     .overview {
       display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr); gap: 24px; margin-bottom: 34px;
     }
@@ -2161,7 +2238,7 @@
       .phase-rail ol { grid-template-columns: repeat(3, minmax(0,1fr)); }
       .archive-controls { justify-items: start; }
       .archive-filter-group { justify-content: flex-start; }
-      .audit-row, .roadmap-grid, .source-dossier-meta, .chapter-compass-grid, .chapter-compass-metrics { grid-template-columns: 1fr; }
+      .audit-row, .roadmap-grid, .source-dossier-meta, .chapter-compass-grid, .chapter-compass-metrics, .deep-briefs-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 700px) {
@@ -2255,6 +2332,17 @@
           </div>
         </div>
         <div class="chapter-compass-grid" id="chapterCompass"></div>
+      </article>
+    </section>
+
+    <section class="deep-briefs-wrap is-deep-section">
+      <article class="card deep-briefs-panel">
+        <div class="section-label">Deep-mode chapter briefs</div>
+        <h2>Each chapter now has its own evidence thesis before the reader drops into exhibits and chronology</h2>
+        <p class="ledger-intro">
+          This is the missing middle layer between the compact chapter compass and the broader evidence desk. In deep mode, each brief explains how to read the chapter, which sources carry it, where to jump next, and what evidence upgrade would most improve the chronicle.
+        </p>
+        <div class="deep-briefs-grid" id="deepBriefs"></div>
       </article>
     </section>
 
@@ -2586,6 +2674,93 @@
       window.addEventListener('chronicle:focus-chapter', (event) => {
         const chapterId = event.detail?.chapterId;
         cardsByChapter.forEach((card, id) => card.classList.toggle('is-active', id === chapterId));
+      });
+    }
+
+    function renderDeepBriefs(briefs, chaptersById, sourcesById, roadmap = []) {
+      const root = document.getElementById('deepBriefs');
+      if (!root) return;
+
+      const roadmapByChapter = new Map();
+      (roadmap || []).forEach((entry) => {
+        if (!roadmapByChapter.has(entry.chapterId)) roadmapByChapter.set(entry.chapterId, []);
+        roadmapByChapter.get(entry.chapterId).push(entry);
+      });
+
+      briefs.forEach((brief) => {
+        const chapter = chaptersById.get(brief.chapterId);
+        if (!chapter) return;
+
+        const card = make('article', 'deep-brief-card');
+        card.dataset.chapter = chapter.id;
+
+        const topline = make('div', 'deep-brief-topline');
+        const phase = make('span', 'artifact-pill', `${chapter.phase} · ${chapter.range}`);
+        phase.dataset.tone = 'evidence';
+        topline.append(phase);
+        if (brief.eyebrow) {
+          const eyebrow = make('span', 'artifact-pill', brief.eyebrow);
+          eyebrow.dataset.tone = 'context';
+          topline.append(eyebrow);
+        }
+        card.append(topline);
+
+        card.append(make('h3', '', brief.title || chapter.title));
+        card.append(make('p', '', brief.summary || chapter.dek));
+
+        const meta = make('div', 'deep-brief-meta');
+        const whyDeep = make('div', 'deep-brief-focus');
+        whyDeep.append(make('strong', '', 'How to read this chapter in deep mode'));
+        whyDeep.append(make('p', '', brief.whyDeep || brief.evidenceMove || chapter.dek));
+        meta.append(whyDeep);
+
+        if (brief.evidenceMove) {
+          const move = make('div', 'deep-brief-focus');
+          move.append(make('strong', '', 'Editorial evidence move'));
+          move.append(make('p', '', brief.evidenceMove));
+          meta.append(move);
+        }
+        card.append(meta);
+
+        const sourceRow = make('div', 'deep-brief-sources');
+        (brief.sourceIds || []).map((sourceId) => sourcesById.get(sourceId)).filter(Boolean).forEach((source) => {
+          const link = make('a', 'artifact-link', source.label);
+          link.href = source.url;
+          link.target = source.url.startsWith('http') ? '_blank' : '_self';
+          if (source.url.startsWith('http')) link.rel = 'noreferrer';
+          sourceRow.append(link);
+        });
+        if (sourceRow.children.length) card.append(sourceRow);
+
+        const actions = make('div', 'deep-brief-actions');
+        [
+          ['Read chapter', `#${chapter.id}`, 'primary'],
+          ['Open chronology', '#archiveTimeline', ''],
+          ['Open roadmap', '#sourceRoadmapWrap', '']
+        ].forEach(([label, target, tone]) => {
+          const link = make('a', `deep-brief-action${tone ? ` ${tone}` : ''}`, label);
+          link.href = target;
+          link.addEventListener('click', () => window.setReadingMode?.('deep'));
+          actions.append(link);
+        });
+        if (brief.focusExhibitId) {
+          const exhibitButton = make('button', 'deep-brief-action', 'Open matching exhibit');
+          exhibitButton.type = 'button';
+          exhibitButton.addEventListener('click', () => {
+            window.setReadingMode?.('deep');
+            document.getElementById(`exhibit-${brief.focusExhibitId}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          });
+          actions.append(exhibitButton);
+        }
+        card.append(actions);
+
+        const roadmapEntry = (roadmapByChapter.get(chapter.id) || [])[0];
+        const upgrade = make('div', 'deep-brief-upgrade');
+        upgrade.append(make('strong', '', brief.nextUpgradeLabel || 'Next upgrade'));
+        upgrade.append(make('span', '', brief.nextUpgrade || roadmapEntry?.title || chapter.evidenceProfile?.artifact || 'No new chapter-specific upgrade target is queued yet.'));
+        card.append(upgrade);
+
+        root.append(card);
       });
     }
 
@@ -2980,6 +3155,7 @@
       exhibits.forEach((exhibit) => {
         const chapter = chaptersById.get(exhibit.chapterId);
         const card = make('section', 'exhibit-card');
+        card.id = `exhibit-${exhibit.id}`;
         card.append(make('div', 'artifact-eyebrow', exhibit.eyebrow));
         card.append(make('h3', '', exhibit.title));
         card.append(make('p', '', exhibit.summary));
@@ -4426,7 +4602,7 @@
     }
 
     async function init() {
-      const [chapters, locations, validationGroups, sources, timeline, artifacts, artifactTaxonomy, presentDirection, sourceRoadmap, exhibits, publicRecordLedger] = await Promise.all([
+      const [chapters, locations, validationGroups, sources, timeline, artifacts, artifactTaxonomy, presentDirection, sourceRoadmap, deepBriefs, exhibits, publicRecordLedger] = await Promise.all([
         loadJson('./data/chapters.json'),
         loadJson('./data/locations.json'),
         loadJson('./data/validation.json'),
@@ -4436,6 +4612,7 @@
         loadJson('./data/artifact-taxonomy.json'),
         loadJson('./data/present-direction.json'),
         loadJson('./data/source-roadmap.json'),
+        loadJson('./data/deep-briefs.json'),
         loadJson('./data/exhibits.json'),
         loadJson('./data/public-record-ledger.json')
       ]);
@@ -4456,6 +4633,7 @@
       initializeReaderModes();
       const archiveApi = renderArchive(timeline.events, sourcesById, chaptersById);
       renderChapterCompass(chapters, sourcesById, eventsByChapterId, artifactsByChapterId, sourceRoadmap, archiveApi.openArchiveScope);
+      renderDeepBriefs(deepBriefs, chaptersById, sourcesById, sourceRoadmap);
       renderChapterLedger(chapters, sourcesById, eventsByChapterId, artifactsByChapterId, sourceRoadmap, archiveApi.openArchiveScope);
       renderChapters(chapters, sourcesById, artifactsByChapterId, taxonomyById, eventsByChapterId, archiveApi.openArchiveScope);
       renderMapNav(chapters, locationById, eventsByChapterId, sourcesById);

@@ -1,0 +1,86 @@
+[
+  {
+    "chapterId": "early-acceleration",
+    "eyebrow": "Deep brief 01 · Opening posture",
+    "title": "Open with restraint so the rest of the record feels trustworthy",
+    "summary": "The first chapter works best as a calibrated thesis instead of a louder myth. The page should preserve the pace of an unusually accelerated trajectory while making the reader aware that the earliest claim still needs direct institutional proof.",
+    "whyDeep": "In deep mode, this chapter should teach the reader how the chronicle handles uncertainty: keep the velocity, mark the gap, and route attention to stronger later proof instead of pretending the opening years are already fully archival.",
+    "evidenceMove": "Use the chapter as an honesty signal. It frames the rest of the page as source-backed editorial work rather than a tribute page that smooths over missing proof.",
+    "sourceIds": ["dossier", "timeline-v2"],
+    "focusExhibitId": null,
+    "nextUpgradeLabel": "Highest-leverage upgrade",
+    "nextUpgrade": "Land a direct university, interview, or conference bio that confirms the USTC-at-16 acceleration detail before making the chapter more explicit."
+  },
+  {
+    "chapterId": "research-formation",
+    "eyebrow": "Deep brief 02 · Academic formation",
+    "title": "Treat the doctorate as the first stable anchor, not a decorative credential",
+    "summary": "This chapter explains why Bloombase later reads like a long technical build instead of a branding-first founder story. The doctorate is the strongest pre-company anchor and should function as the first chapter where the reader feels solid ground under the biography.",
+    "whyDeep": "Deep mode should make the reader see the academic chapter as causal evidence: serious engineering formation makes the later persistence in encryption, trust infrastructure, and enterprise security more legible.",
+    "evidenceMove": "Keep the copy calm and thesis-led, then point readers toward the sourcing gap so they understand exactly what would upgrade this chapter from a bridge source to direct institutional confirmation.",
+    "sourceIds": ["launch-academy", "timeline-v2"],
+    "focusExhibitId": null,
+    "nextUpgradeLabel": "Best next capture",
+    "nextUpgrade": "Find a CUHK-hosted record — thesis, profile, departmental page, or lab bio — that directly ties Sean Xiang to the doctorate."
+  },
+  {
+    "chapterId": "california-transition",
+    "eyebrow": "Deep brief 03 · Irvine bridge",
+    "title": "Make Irvine read like the hinge between research depth and company formation",
+    "summary": "This is the chapter that keeps the biography from jumping abruptly from Hong Kong academia to Silicon Valley founder mythology. It is valuable because it shows a U.S. research context before the company narrative takes over.",
+    "whyDeep": "A good deep-mode reader should come away seeing Irvine as the bridge chapter that changes geography, institutions, and plausibility all at once — even if the direct institutional record still needs strengthening.",
+    "evidenceMove": "Use the chapter to tighten narrative continuity. The win is not visual spectacle; it is a cleaner handoff from scientist to operator.",
+    "sourceIds": ["launch-academy", "dossier"],
+    "focusExhibitId": null,
+    "nextUpgradeLabel": "Best next capture",
+    "nextUpgrade": "Replace the current profile-dependent bridge with a Beckman or UC Irvine institutional mention that directly names the scientist-era role."
+  },
+  {
+    "chapterId": "founding-bloombase",
+    "eyebrow": "Deep brief 04 · Founding release trail",
+    "title": "Anchor the founder story in dated releases, then show how the company thickens around them",
+    "summary": "The founding section is strongest when it starts with the 2013 OpenStack and VMware release trail and then layers in the 2014 advisory-board signal. That sequence makes Bloombase feel like an emerging institution in a hard trust market, not a startup origin story told backwards.",
+    "whyDeep": "Deep mode should let readers audit the first public company narrative: named role, dated publication, infrastructure-market language, then a broader company-building signal a year later.",
+    "evidenceMove": "This is where the chronicle stops being inferred biography and becomes documented market-facing record. The exhibit should feel like an archive drawer of founding proof, not a celebratory founder montage.",
+    "sourceIds": ["openstack-2013", "vmware-2013", "slayton-2014"],
+    "focusExhibitId": "founding-release-trail",
+    "nextUpgradeLabel": "Refinement pass",
+    "nextUpgrade": "If an earlier founder bio, archived company page, or incorporation-era document appears, use it to shorten the leap between pre-founder context and the 2013 public trail."
+  },
+  {
+    "chapterId": "enterprise-validation",
+    "eyebrow": "Deep brief 05 · Validation architecture",
+    "title": "Read the middle years as an accumulation of trust surfaces, not a logo parade",
+    "summary": "This chapter is the durability proof. Certification, alliance status, HSM interoperability, security validation, storage-networking proof, and cloud-marketplace distribution all accumulate across different years and different parts of the stack.",
+    "whyDeep": "Deep mode should clarify that the important pattern is cadence. The company keeps reappearing where assurance matters, which is stronger than any single partner announcement taken in isolation.",
+    "evidenceMove": "Use the exhibit as a comparative surface: each artifact marks a different kind of institutional trust, so the reader sees progression instead of repetition.",
+    "sourceIds": ["vmware-2014", "ultra-2016", "ibm-2017", "atto-2017", "azure-2019"],
+    "focusExhibitId": "validation-arc",
+    "nextUpgradeLabel": "Editorial expansion",
+    "nextUpgrade": "Keep widening the comparative treatment so validation reads as a structured trust stack across certification, HSM, infrastructure, and cloud distribution."
+  },
+  {
+    "chapterId": "geographic-expansion",
+    "eyebrow": "Deep brief 06 · Geography with a reason",
+    "title": "Use geography only where place changes the strategic reading of the story",
+    "summary": "The Vancouver chapter works because it is not a decorative map pin. The Launch Academy profile explains why Canada mattered, while the company offices page proves that the move belongs to a real operating footprint.",
+    "whyDeep": "In deep mode, the geography section should answer a specific reader question: how did the story move across institutions and markets, and which location changes actually altered the company arc?",
+    "evidenceMove": "Pair strategic rationale with operating-footprint proof so the map behaves like editorial orientation and then hands off to evidence cleanly.",
+    "sourceIds": ["launch-academy", "bloombase-offices"],
+    "focusExhibitId": "geography-proof",
+    "nextUpgradeLabel": "Evidence quality rule",
+    "nextUpgrade": "Preserve selectivity: only add more geography if the new place changes the story and has direct public support."
+  },
+  {
+    "chapterId": "ai-era",
+    "eyebrow": "Deep brief 07 · Present-tense relevance",
+    "title": "Close on AI infrastructure with evidence of reframing, visibility, and alliance execution",
+    "summary": "The last chapter matters because it reopens the story in the present tense. The 2023 NVIDIA argument reframes the technical thesis, the public news surface shows the company still speaking, and the 2025 Utimaco announcement names the AI-era alliance directly.",
+    "whyDeep": "Deep mode should make the final section feel less like a generic 'still active' claim and more like a current infrastructure thesis with dated, auditable signals.",
+    "evidenceMove": "This is the right chapter for future media density because the direct sourcing is already strong. Visuals here can behave like exhibits rather than atmosphere.",
+    "sourceIds": ["nvidia-2023", "bloombase-news-index", "utimaco-2025"],
+    "focusExhibitId": "ai-era-signal-stack",
+    "nextUpgradeLabel": "Next premium layer",
+    "nextUpgrade": "Add preserved conference captures or article visuals only when each asset ties back to a durable public URL and reinforces the existing AI-era signal stack."
+  }
+]
