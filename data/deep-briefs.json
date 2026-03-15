@@ -1,15 +1,27 @@
 [
   {
-    "chapterId": "early-acceleration",
-    "eyebrow": "Deep brief 01 · Opening posture",
-    "title": "Open with restraint so the rest of the record feels trustworthy",
-    "summary": "The first chapter works best as a calibrated thesis instead of a louder myth. The page should preserve the pace of an unusually accelerated trajectory while making the reader aware that the earliest claim still needs direct institutional proof.",
-    "whyDeep": "In deep mode, this chapter should teach the reader how the chronicle handles uncertainty: keep the velocity, mark the gap, and route attention to stronger later proof instead of pretending the opening years are already fully archival.",
-    "evidenceMove": "Use the chapter as an honesty signal. It frames the rest of the page as source-backed editorial work rather than a tribute page that smooths over missing proof.",
+    "chapterId": "jincheng-birth",
+    "eyebrow": "Deep brief 01 · Origin",
+    "title": "Documenting the Shanxi origins with narrative restraint",
+    "summary": "This chapter establishes Jincheng, Shanxi, as the starting point of the chronicle. It is the beginning of the trajectory, kept simple to maintain the focus on the technical path ahead.",
+    "whyDeep": "In deep mode, the reader should see Jincheng as the geographical baseline. We use it to set a tone of precision: start with the facts we have and prepare for the academic acceleration in the next chapter.",
+    "evidenceMove": "Establish the cradle of the story. It serves as a calm baseline and an honesty signal before the high-velocity academic records begin.",
+    "sourceIds": ["dossier", "timeline-v2"],
+    "focusExhibitId": null,
+    "nextUpgradeLabel": "Sourcing target",
+    "nextUpgrade": "Identify any primary local records or early biographical mentions that anchor the Shanxi years."
+  },
+  {
+    "chapterId": "hefei-ustc",
+    "eyebrow": "Deep brief 02 · USTC Entrance",
+    "title": "The first high-acceleration academic anchor",
+    "summary": "Entering USTC in 1980 at age 16 for a Physics major is the first mythic-level milestone. It defines the intellectual momentum that carries through the rest of the chronicle.",
+    "whyDeep": "Deep mode allows the reader to audit the 1980 entry and Physics major claims. This acceleration provides the causal explanation for the depth of scientific foundation seen later in the doctoral years.",
+    "evidenceMove": "Highlight the Physics major at USTC as the foundational scientific rigor. Marking the gap here signals that we prioritize institutional proof for this critical early leap.",
     "sourceIds": ["dossier", "timeline-v2"],
     "focusExhibitId": null,
     "nextUpgradeLabel": "Highest-leverage upgrade",
-    "nextUpgrade": "Land a direct university, interview, or conference bio that confirms the USTC-at-16 acceleration detail before making the chapter more explicit."
+    "nextUpgrade": "Land a direct university, interview, or conference bio that confirms the 1980 USTC entry and Physics major detail."
   },
   {
     "chapterId": "research-formation",

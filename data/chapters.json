@@ -1,28 +1,64 @@
 [
   {
-    "id": "early-acceleration",
-    "phase": "Early formation",
+    "id": "jincheng-birth",
+    "phase": "Birthplace",
     "range": "Early years",
-    "title": "An accelerated technical trajectory starts early",
-    "dek": "Sean Xiang’s technical path began with an unusually compressed timeline, starting from his birth in Jincheng, Shanxi, to an early admission to USTC in Hefei at age 16.",
+    "title": "Shanxi is start",
+    "dek": "Sean Xiang was born in Jincheng, Shanxi.",
     "narrative": [
-      "Sean Xiang was born in Jincheng, Shanxi, before his intellectual momentum carried him to the University of Science and Technology of China (USTC) in Hefei at an exceptionally young age.",
-      "Entering USTC at 16 marked the formal beginning of a highly accelerated academic and technical trajectory, laying a rigorous foundation in the sciences before his subsequent transition into advanced engineering and applied cryptography."
+      "Sean Xiang was born in Jincheng, Shanxi, marking the beginning of his journey."
     ],
     "proofPoints": [
-      "Born in Jincheng, Shanxi.",
-      "Admitted to the University of Science and Technology of China (USTC) in Hefei at age 16.",
-      "A fast-tracked early formation establishing a deep baseline for future technical specialization."
+      "Born in Jincheng, Shanxi."
     ],
-    "locationId": "jincheng-hefei",
-    "locationIds": ["jincheng", "hefei"],
-    "mapCaption": "The journey begins in Jincheng, Shanxi, leading swiftly to Hefei, Anhui, where Xiang entered USTC at 16.",
+    "locationId": "jincheng",
+    "locationIds": ["jincheng"],
+    "mapCaption": "The journey begins in Jincheng, Shanxi.",
     "mapCamera": {
       "center": [
-        113.5,
-        23
+        112.8518,
+        35.4907
       ],
-      "zoom": 4.35,
+      "zoom": 5.0,
+      "pitch": 18,
+      "bearing": -10
+    },
+    "sources": [
+      "dossier",
+      "timeline-v2"
+    ],
+    "evidenceProfile": {
+      "stanceLabel": "Evidence stance",
+      "stance": "Restrained narrative",
+      "strengthLabel": "Source mix",
+      "strength": "Working synthesis only",
+      "artifactLabel": "Artifact readiness",
+      "artifact": "Hold until direct primary documentation improves"
+    }
+  },
+  {
+    "id": "hefei-ustc",
+    "phase": "USTC",
+    "range": "1980",
+    "title": "Entering USTC",
+    "dek": "In Hefei, Sean Xiang entered USTC in 1980, majoring in Physics.",
+    "narrative": [
+      "In Hefei, he entered the University of Science and Technology of China (USTC) in 1980, majoring in Physics.",
+      "This marked the formal beginning of a highly accelerated academic and technical trajectory, laying a rigorous foundation in the sciences."
+    ],
+    "proofPoints": [
+      "Admitted to the University of Science and Technology of China (USTC) in Hefei in 1980.",
+      "Majored in Physics."
+    ],
+    "locationId": "hefei",
+    "locationIds": ["hefei"],
+    "mapCaption": "Xiang entered USTC in Hefei, Anhui in 1980, majoring in Physics.",
+    "mapCamera": {
+      "center": [
+        117.2638,
+        31.8390
+      ],
+      "zoom": 5.0,
       "pitch": 18,
       "bearing": -10
     },

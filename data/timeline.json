@@ -371,31 +371,32 @@
       "chapterId": "ai-era"
     },
     {
+      "start_date": {
+        "year": "1980"
+      },
       "text": {
-        "headline": "Age 16 - USTC",
-        "text": "Entered the University of Science and Technology of China (working narrative; source verification pending)."
+        "headline": "Entering USTC",
+        "text": "Entered the University of Science and Technology of China in 1980, majoring in Physics."
       },
       "sourceIds": [
         "dossier",
         "timeline-v2"
       ],
-      "id": "age-16-ustc",
-      "chapterId": "early-acceleration",
-      "dateLabel": "Undated - claim still being tightened",
-      "undated": true,
+      "id": "entering-ustc",
+      "chapterId": "hefei-ustc",
       "sortBucket": "formation"
     },
     {
       "text": {
-        "headline": "Early Technical Formation",
-        "text": "Built the foundation for a long technical trajectory."
+        "headline": "Born in Shanxi",
+        "text": "Born in Jincheng, Shanxi, marking the beginning of the journey."
       },
       "sourceIds": [
         "dossier",
         "timeline-v2"
       ],
-      "id": "early-technical-formation",
-      "chapterId": "early-acceleration",
+      "id": "born-in-shanxi",
+      "chapterId": "jincheng-birth",
       "dateLabel": "Undated - opening frame",
       "undated": true,
       "sortBucket": "formation"
