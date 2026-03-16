@@ -1,20 +1,5 @@
 [
   {
-    "id": "hong-kong",
-    "name": "Hong Kong",
-    "label": "CUHK / doctoral formation",
-    "lat": 22.4196,
-    "lon": 114.2068,
-    "summary": "The strongest public anchor of the academic chapter: Ph.D. formation at The Chinese University of Hong Kong.",
-    "camera": {
-      "center": [
-        114.2068,
-        22.4196
-      ],
-      "zoom": 9.5
-    }
-  },
-  {
     "id": "jincheng",
     "name": "Jincheng, Shanxi",
     "label": "Early years / Birthplace",
@@ -42,6 +27,21 @@
         31.8390
       ],
       "zoom": 5.0
+    }
+  },
+  {
+    "id": "hong-kong",
+    "name": "Hong Kong",
+    "label": "CUHK / doctoral formation",
+    "lat": 22.4196,
+    "lon": 114.2068,
+    "summary": "The strongest public anchor of the academic chapter: Ph.D. formation at The Chinese University of Hong Kong.",
+    "camera": {
+      "center": [
+        114.2068,
+        22.4196
+      ],
+      "zoom": 9.5
     }
   },
   {
@@ -108,13 +108,13 @@
     "id": "global-ai",
     "name": "Global AI infrastructure",
     "label": "Conference and alliance layer",
-    "lat": 0,
-    "lon": 0,
+    "lat": 37.7749,
+    "lon": -122.4194,
     "summary": "The current chapter is distributed across cloud, accelerator, and security ecosystems rather than one city.",
     "camera": {
       "center": [
-        10,
-        22
+        -122.4194,
+        37.7749
       ],
       "zoom": 1.15
     }

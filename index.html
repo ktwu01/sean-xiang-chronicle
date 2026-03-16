@@ -5301,10 +5301,13 @@
                 properties: { chapterId: chapter.id },
                 geometry: {
                   type: 'LineString',
-                  coordinates: [
-                    [previousReal.lon, previousReal.lat],
-                    [current.lon, current.lat]
-                  ]
+                  coordinates: (() => {
+                    let toLon = current.lon;
+                    const diff = toLon - previousReal.lon;
+                    if (diff < -180) toLon += 360;
+                    if (diff > 180) toLon -= 360;
+                    return [[previousReal.lon, previousReal.lat], [toLon, current.lat]];
+                  })()
                 }
               }
             ]
@@ -5352,13 +5355,29 @@
       map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
 
       map.on('load', () => {
+        // Build journey-route coordinates with antimeridian correction so the
+        // line always travels in the geographically correct direction (east
+        // across the Pacific rather than west through Europe when crossing
+        // from Asia to the Americas).
+        const journeyCoords = realLocations.reduce((acc, loc) => {
+          let lon = loc.lon;
+          if (acc.length > 0) {
+            const prevLon = acc[acc.length - 1][0];
+            const diff = lon - prevLon;
+            if (diff < -180) lon += 360;   // jumped too far west → go east
+            if (diff > 180) lon -= 360;    // jumped too far east → go west
+          }
+          acc.push([lon, loc.lat]);
+          return acc;
+        }, []);
+
         map.addSource('journey-route', {
           type: 'geojson',
           data: {
             type: 'Feature',
             geometry: {
               type: 'LineString',
-              coordinates: realLocations.map((location) => [location.lon, location.lat])
+              coordinates: journeyCoords
             }
           }
         });
