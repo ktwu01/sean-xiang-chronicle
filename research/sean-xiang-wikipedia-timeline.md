@@ -396,6 +396,16 @@
 [^46]: Bloombase / Hitachi. "StoreSafe for Hitachi Content Platform (HCP) Solution Brief." https://bloomba.se/content/DsRDs8xi
 [^47]: NVIDIA GTC 2024. "Session S62642: Post-Quantum Security with BlueField DPUs and Morpheus." https://www.nvidia.com/en-us/on-demand/session/gtc24-s62642/
 [^48]: Bloombase. "Bloombase and Utimaco Announce Technology Alliance for AI Era." April 29, 2025. https://www.bloombase.com/news/2025-04-29-bloombase-and-utimaco-announce-technology-alliance-to-deliver-enhanced-data-security-solutions-for-ai-era
+[^49]: Bloombase. "Bloombase and nCipher Collaborate to Enhance Data-at-Rest Protection in the Cloud." October 21, 2019. https://www.bloombase.com/news/2019-10-21-bloombase-and-ncipher-collaborate-to-enhance-data-at-rest-protection-in-the-cloud
+[^50]: Bloombase. "Bloombase Joins Thales ASAP Alliance." November 2, 2015. https://www.bloombase.com/news/2015-11-02-bloombase-joins-thales-alliance-for-solution-and-application-providers-asap-with-encryption-solution-for-cloud-and-big-data-applications
+[^51]: AWS Marketplace. "Bloombase StoreSafe (AMI B07FNS7P4Q)." https://aws.amazon.com/marketplace/pp/B07FNS7P4Q
+[^52]: VMware Marketplace. "Bloombase StoreSafe Security Server." https://marketplace.cloud.vmware.com/services/details/bloombase-storesafe-security-server/?slug=true
+[^53]: Bloombase. "Bloombase Interoperability with IBM Platforms." https://www.bloombase.com/go/ibm
+[^54]: Bloombase. "Bloombase KMIP Integration with HPE ESKM." https://www.bloombase.com/interoperability/hp.html
+[^55]: Bloombase. "Bloombase Official Interoperability Page for Dell Technologies." https://www.bloombase.com/interoperability/dell
+[^56]: Bloombase. "Bloombase Official Solution Page for Hitachi Vantara Interoperability." https://www.bloombase.com/interoperability/hitachi-vantara/
+[^57]: Bloombase. "Thales nShield HSM Interoperability Page." https://www.bloombase.com/interoperability/thales
+[^58]: Bloombase. "Utimaco HSM Interoperability and Solution Details." https://www.bloombase.com/interoperability/utimaco
 
 ---
 
