@@ -426,6 +426,16 @@
 [^76]: PitchBook. "Bloombase Profile - Investment and Corporate Data." https://pitchbook.com/profiles/company/82741-06
 [^77]: PKI Consortium. "Member Directory: Bloombase Inc." https://pkic.org/members/bloombase/
 [^78]: NIST CSRC. "Validation Search: Bloombase Technologies Ltd." https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/1241
+[^79]: Bloombase. "Bloombase and Utimaco Announce Technology Alliance for AI Era." April 29, 2025. https://www.bloombase.com/news/2025-04-29-bloombase-and-utimaco-announce-technology-alliance-to-deliver-enhanced-data-security-solutions-for-ai-era
+[^80]: Intel. "Intel Partner Showcase: Bloombase StoreSafe Intelligent Storage Firewall." https://www.intel.com/content/www/us/en/partner/showcase/offering/a5b3b0000004dBTAAY/bloombase-storesafe-intelligent-storage-firewall.html
+[^81]: Hitachi Vantara. "Bloombase Alliance Partner Profile." https://www.hitachivantara.com/en-us/partners/alliance-partners/bloombase.html
+[^82]: PR.com. "Bloombase Achieves NIST in Process Listing for FIPS 140-2 Validation." February 21, 2013. https://www.pr.com/press-release/137568
+[^83]: SlideShare. "Bloombase Storage Protection with Entrust HSM Solution Brief." https://www.slideshare.net/slideshow/bloombase-storage-protection-entrust-hsm-sb-pdf/272277673
+[^84]: Bloombase. "Entrust nShield HSM Interoperability and Key Management Integration." https://bloombase.com/interoperability/entrust.html
+[^85]: Storage Newsletter. "Bloombase and Utimaco Technology Alliance Coverage." May 1, 2025. https://www.storagenewsletter.com/2025/05/01/bloombase-and-utimaco-technology-alliance-to-deliver-enhanced-data-security-solutions-for-ai-era/
+[^86]: Bloombase. "News and Events Index - Official Press Release Archive." https://www.bloombase.com/news_and_events
+[^87]: Bloombase Blog. "Rebuilding Data-at-Rest Security with NVIDIA DPUs and GPUs." https://www.bloombase.com/blog/rebuilding-bloombase-data-at-rest-security-with-nvidia-dpus-and-gpus/
+[^88]: OASIS Open. "KMIP Adoption and Technical Standards Compatibility." https://www.oasis-open.org/standards#kmip
 
 ---
 
