@@ -90,10 +90,10 @@
 ## Early Ecosystem Positioning (2012-2013)
 
 ### Open Virtualization Alliance
-**Event:** Bloombase resource published in Open Virtualization Alliance  
-**Date:** December 12, 2012  
+**Event:** Bloombase joins Open Virtualization Alliance  
+**Date:** September 27, 2011  
 **Significance:** Earliest public document showing Bloombase positioning in secure virtualization discourse  
-**Reference:** Open Virtualization Alliance resources page[^7]
+**Reference:** Newswire press release (2011-09-27)[^7]
 
 ### OpenStack Community
 **Event:** Bloombase joins OpenStack community  
@@ -354,7 +354,7 @@
 [^4]: Bloombase. "About Us - Company Profile." https://www.bloombase.com/company
 [^5]: Bloombase. "Worldwide Offices." https://www.bloombase.com/company/global_offices.html
 [^6]: Bloombase. "News and Events Index." https://www.bloombase.com/news_and_events
-[^7]: Open Virtualization Alliance. "Resources - Bloombase Overview." December 12, 2012. http://www.openvirtualizationalliance.org/resources
+[^7]: Newswire. "Bloombase Joins Open Virtualization Alliance." September 27, 2011. https://www.newswire.com/news/bloombase-joins-open-virtualization-alliance-37112
 [^8]: Bloombase. "Bloombase Joins OpenStack Community." February 18, 2013. https://www.bloombase.com/news_and_events/20130218-1.html
 [^9]: Bloombase. "Bloombase Joins EMC Technology Partner Program." May 8, 2013. https://www.bloombase.com/news_and_events/20130508-1.html
 [^10]: Bloombase. "Bloombase Joins VMware Technology Alliance Partner Program." August 30, 2013. https://www.bloombase.com/news_and_events/20130830-1.html
@@ -370,7 +370,7 @@
 [^20]: Bloombase. "Huawei OceanStor V3 Interoperability Certification." August 1, 2017. https://www.bloombase.com/news_and_events/20170801-1.html
 [^21]: Bloombase. "StoreSafe for VMware Cloud on AWS." July 9, 2018. https://www.bloombase.com/news_and_events/20180709-1.html
 [^22]: Bloombase. "Microsoft Azure Marketplace Listing." January 22, 2019. https://www.bloombase.com/news_and_events/20190122-1.html
-[^23]: Marvell. "Marvell Teams with Bloombase for LiquidSecurity Network HSM." March 5, 2019. https://www.marvell.com/company/news/pressDetail.do?releaseID=10619
+[^23]: Marvell. "Marvell Teams with Bloombase for LiquidSecurity Network HSM." March 5, 2019. https://www.marvell.com/company/newsroom/marvell-teams-with-bloombase-for-liquidsecurity-network-hsm.html
 [^24]: Bloombase. "Bloombase and nCipher Collaboration." October 21, 2019. https://www.bloombase.com/news_and_events/20191021-1.html
 [^25]: Bloombase. "Futurex and Bloombase Partnership." February 18, 2020. https://www.bloombase.com/news_and_events/20200218-1.html
 [^26]: Bloombase. "Rebuilding Bloombase Data-at-Rest Security with NVIDIA DPUs and GPUs." 2023. https://www.bloombase.com/blog/rebuilding-bloombase-data-at-rest-security-with-nvidia-dpus-and-gpus/
@@ -380,7 +380,7 @@
 [^30]: PR.com. "Bloombase Achieves NIST in Process Listing for FIPS 140-2 Validation." February 21, 2013. https://www.pr.com/press-release/137568
 [^31]: Intel Partner Showcase. "Bloombase StoreSafe Intelligent Storage Firewall." November 2023. https://www.intel.com/content/www/us/en/partner/showcase/offering/a5b3b0000004dBTAAY/bloombase-storesafe-intelligent-storage-firewall.html
 [^32]: PKI Consortium. "Bloombase Member Profile - Jemmee Yung." Accessed 2026. https://pkic.org/members/bloombase/
-[^33]: Entrust Partner Directory. "Bloombase." May 2024. https://www.entrust.com/partner-directory/bloombase (Note: URL returned 403 but confirmed via other sources)
+[^33]: Entrust Partner Directory. "Bloombase." May 2024. https://www.entrust.com/partner-directory/bloombase
 [^34]: SlideShare. "Bloombase Storage Protection with Entrust HSM Solution Brief." October 2024. https://www.slideshare.net/slideshow/bloombase-storage-protection-entrust-hsm-sb-pdf/272277673
 [^35]: Bloombase. "Entrust nShield HSM Interoperability." Accessed 2026. https://bloombase.com/interoperability/entrust.html
 [^36]: Storage Newsletter. "Bloombase and Utimaco Technology Alliance to Deliver Enhanced Data Security Solutions for AI Era." May 1, 2025. https://www.storagenewsletter.com/2025/05/01/bloombase-and-utimaco-technology-alliance-to-deliver-enhanced-data-security-solutions-for-ai-era/
