@@ -103,3 +103,26 @@ now its not rendering correctly: the website map only show the same place/cannot
 ## Reference: Successful Conversion Example
 
 A successful conversion was completed in commit `89ee2dcde56ca155793af1ccd56bcb518492cd58`, which demonstrates the proper approach to adapting this template while maintaining all styles and functionality.
+
+---
+
+## Live forks built from this template
+
+These are the chronicles that have been adapted from this template. Each is a live GitHub Pages site:
+
+| Subject | Repository | Live site |
+|---------|------------|-----------|
+| Sean Xiang (original) | [ktwu01/sean-xiang-chronicle](https://github.com/ktwu01/sean-xiang-chronicle) | [ktwu01.github.io/sean-xiang-chronicle](https://ktwu01.github.io/sean-xiang-chronicle/) |
+| Chen Ning Yang (杨振宁) | [ut01/chen-ning-yang-chronicle](https://github.com/ut01/chen-ning-yang-chronicle) | [ut01.github.io/chen-ning-yang-chronicle](https://ut01.github.io/chen-ning-yang-chronicle/) |
+| Daniella Rempe | [ut01/daniella-rempe-chronicle](https://github.com/ut01/daniella-rempe-chronicle) | [ut01.github.io/daniella-rempe-chronicle](https://ut01.github.io/daniella-rempe-chronicle/) |
+| Ashley Matheny | [ut01/ashley-matheny-chronicle](https://github.com/ut01/ashley-matheny-chronicle) | [ut01.github.io/ashley-matheny-chronicle](https://ut01.github.io/ashley-matheny-chronicle/) |
+| Gengchen Mai | [ut01/gengchen-mai-chronicle](https://github.com/ut01/gengchen-mai-chronicle) | [ut01.github.io/gengchen-mai-chronicle](https://ut01.github.io/gengchen-mai-chronicle/) |
+| Marc Hesse | [ut01/marc-hesse-chronicle](https://github.com/ut01/marc-hesse-chronicle) | [ut01.github.io/marc-hesse-chronicle](https://ut01.github.io/marc-hesse-chronicle/) |
+| Geeta Persad | [ut01/geeta-persad-chronicle](https://github.com/ut01/geeta-persad-chronicle) | [ut01.github.io/geeta-persad-chronicle](https://ut01.github.io/geeta-persad-chronicle/) |
+| Kehan Dong | [ut01/kehan-dong-chronicle](https://github.com/ut01/kehan-dong-chronicle) | [ut01.github.io/kehan-dong-chronicle](https://ut01.github.io/kehan-dong-chronicle/) |
+| Koutian Wu | [ut01/koutian-wu-chronicle](https://github.com/ut01/koutian-wu-chronicle) | [ut01.github.io/koutian-wu-chronicle](https://ut01.github.io/koutian-wu-chronicle/) |
+| Juan Santiago | [qijiang-yoyo/juan-santiago-chronicle](https://github.com/qijiang-yoyo/juan-santiago-chronicle) | [qijiang-yoyo.github.io/juan-santiago-chronicle](https://qijiang-yoyo.github.io/juan-santiago-chronicle/) |
+| Zong-Liang Yang | [ktwugoat/zong-liang-yang-chronicle](https://github.com/ktwugoat/zong-liang-yang-chronicle) | [ktwugoat.github.io/zong-liang-yang-chronicle](https://ktwugoat.github.io/zong-liang-yang-chronicle/) |
+| Eric C. Greene | [yzliu03/Eric-Greene-chronicle](https://github.com/yzliu03/Eric-Greene-chronicle) | [yzliu03.github.io/Eric-Greene-chronicle](https://yzliu03.github.io/Eric-Greene-chronicle/) |
+
+If you've forked this template, open a PR adding your chronicle here so other contributors can find it.
